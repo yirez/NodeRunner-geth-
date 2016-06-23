@@ -50,7 +50,8 @@ namespace Node_Runner
         private void btnMine_Click(object sender, EventArgs e)
         {
             try
-            {
+            { 
+                toggleGethFunctionalityButtons(false,false);
                 btnStartStop.Enabled = false;
                 isMining = true;
                 refreshStaticNodeList();
@@ -103,14 +104,16 @@ namespace Node_Runner
                 if (!isRunning)
                 {
                     backgroundWorkerProcessHandler.RunWorkerAsync(); 
-                    btnStartStop.Text = "STOP";
+                    btnStartStop.Text = "STOP"; 
+                    toggleGethFunctionalityButtons(true, false);
                 }
                 else
                 {
                     btnMine.Enabled = true;
                     backgroundWorkerProcessHandler.CancelAsync();
                     stopGeth();
-                    btnStartStop.Text = "START";
+                    btnStartStop.Text = "START"; 
+                    toggleGethFunctionalityButtons(false, false);
                 }
             }
             catch (Exception ex)
@@ -191,6 +194,7 @@ namespace Node_Runner
                 Invoke(new Action(() => btnConnectedPeers.Enabled = status));
                 Invoke(new Action(() => btnPeerCount.Enabled = status));
                 Invoke(new Action(() => nmrcVerbosity.Enabled = status));
+                Invoke(new Action(() => txtCommands.Enabled = status));
             }
             else
             {
@@ -198,6 +202,7 @@ namespace Node_Runner
                 btnConnectedPeers.Enabled = status;
                 btnPeerCount.Enabled = status;
                 nmrcVerbosity.Enabled = status;
+                txtCommands.Enabled = status;
             }
         }
 
@@ -281,10 +286,7 @@ namespace Node_Runner
                 process.BeginErrorReadLine();
 
                 //takes some time to get geth running
-                Thread.Sleep(2000);
-
-                toggleGethFunctionalityButtons(true);
-
+                Thread.Sleep(2000); 
                 process.WaitForExit();
             }
         }
