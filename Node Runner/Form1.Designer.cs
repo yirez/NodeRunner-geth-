@@ -49,7 +49,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.chkPrimary = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lstStaticNodes = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.backgroundWorkerProcessHandler = new System.ComponentModel.BackgroundWorker();
             this.txtCommands = new System.Windows.Forms.TextBox();
@@ -59,6 +58,7 @@
             this.nmrcVerbosity = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.btnMine = new System.Windows.Forms.Button();
+            this.lstStaticNodes = new System.Windows.Forms.ListView();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcVerbosity)).BeginInit();
@@ -237,15 +237,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Static Nodes";
             // 
-            // lstStaticNodes
-            // 
-            this.lstStaticNodes.ColumnWidth = 300;
-            this.lstStaticNodes.FormattingEnabled = true;
-            this.lstStaticNodes.Location = new System.Drawing.Point(6, 19);
-            this.lstStaticNodes.Name = "lstStaticNodes";
-            this.lstStaticNodes.Size = new System.Drawing.Size(312, 134);
-            this.lstStaticNodes.TabIndex = 24;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnFindGenesis);
@@ -357,6 +348,16 @@
             this.btnMine.UseVisualStyleBackColor = true;
             this.btnMine.Click += new System.EventHandler(this.btnMine_Click);
             // 
+            // lstStaticNodes
+            // 
+            this.lstStaticNodes.Location = new System.Drawing.Point(7, 20);
+            this.lstStaticNodes.Name = "lstStaticNodes";
+            this.lstStaticNodes.Size = new System.Drawing.Size(306, 138);
+            this.lstStaticNodes.TabIndex = 0;
+            this.lstStaticNodes.UseCompatibleStateImageBehavior = false;
+            this.lstStaticNodes.View = System.Windows.Forms.View.List;
+            this.lstStaticNodes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstStaticNodes_KeyUp);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,7 +408,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chkPrimary;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListBox lstStaticNodes;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.ComponentModel.BackgroundWorker backgroundWorkerProcessHandler;
         private System.Windows.Forms.TextBox txtCommands;
@@ -417,6 +417,7 @@
         private System.Windows.Forms.NumericUpDown nmrcVerbosity;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnMine;
+        private System.Windows.Forms.ListView lstStaticNodes;
     }
 }
 
