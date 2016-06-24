@@ -66,6 +66,9 @@
             // 
             // txtGenesisFilePath
             // 
+            this.txtGenesisFilePath.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtGenesisFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtGenesisFilePath.ForeColor = System.Drawing.SystemColors.Info;
             this.txtGenesisFilePath.Location = new System.Drawing.Point(88, 68);
             this.txtGenesisFilePath.Name = "txtGenesisFilePath";
             this.txtGenesisFilePath.Size = new System.Drawing.Size(225, 20);
@@ -77,26 +80,33 @@
             // 
             // btnFindGenesis
             // 
+            this.btnFindGenesis.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnFindGenesis.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFindGenesis.Location = new System.Drawing.Point(88, 92);
             this.btnFindGenesis.Name = "btnFindGenesis";
             this.btnFindGenesis.Size = new System.Drawing.Size(75, 20);
             this.btnFindGenesis.TabIndex = 2;
             this.btnFindGenesis.Text = "Browse";
-            this.btnFindGenesis.UseVisualStyleBackColor = true;
+            this.btnFindGenesis.UseVisualStyleBackColor = false;
             this.btnFindGenesis.Click += new System.EventHandler(this.btnFindGenesis_Click);
             // 
             // btnFindDataDir
             // 
+            this.btnFindDataDir.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnFindDataDir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFindDataDir.Location = new System.Drawing.Point(88, 146);
             this.btnFindDataDir.Name = "btnFindDataDir";
             this.btnFindDataDir.Size = new System.Drawing.Size(75, 20);
             this.btnFindDataDir.TabIndex = 2;
             this.btnFindDataDir.Text = "Browse";
-            this.btnFindDataDir.UseVisualStyleBackColor = true;
+            this.btnFindDataDir.UseVisualStyleBackColor = false;
             this.btnFindDataDir.Click += new System.EventHandler(this.btnFindDataDir_Click);
             // 
             // txtDataFolder
             // 
+            this.txtDataFolder.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtDataFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDataFolder.ForeColor = System.Drawing.SystemColors.Info;
             this.txtDataFolder.Location = new System.Drawing.Point(88, 125);
             this.txtDataFolder.Name = "txtDataFolder";
             this.txtDataFolder.Size = new System.Drawing.Size(225, 20);
@@ -107,6 +117,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.Info;
             this.label1.Location = new System.Drawing.Point(4, 132);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
@@ -116,6 +127,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.Info;
             this.label2.Location = new System.Drawing.Point(18, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
@@ -124,6 +136,9 @@
             // 
             // txtNodeID
             // 
+            this.txtNodeID.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtNodeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNodeID.ForeColor = System.Drawing.SystemColors.Info;
             this.txtNodeID.Location = new System.Drawing.Point(88, 42);
             this.txtNodeID.Name = "txtNodeID";
             this.txtNodeID.Size = new System.Drawing.Size(225, 20);
@@ -133,6 +148,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.Info;
             this.label4.Location = new System.Drawing.Point(18, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 13);
@@ -141,6 +157,9 @@
             // 
             // txtNetworkID
             // 
+            this.txtNetworkID.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtNetworkID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNetworkID.ForeColor = System.Drawing.SystemColors.Info;
             this.txtNetworkID.Location = new System.Drawing.Point(88, 16);
             this.txtNetworkID.Name = "txtNetworkID";
             this.txtNetworkID.Size = new System.Drawing.Size(225, 20);
@@ -150,6 +169,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.Info;
             this.label5.Location = new System.Drawing.Point(28, 176);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 13);
@@ -158,6 +178,9 @@
             // 
             // txtRPCPort
             // 
+            this.txtRPCPort.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtRPCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRPCPort.ForeColor = System.Drawing.SystemColors.Info;
             this.txtRPCPort.Location = new System.Drawing.Point(88, 173);
             this.txtRPCPort.Name = "txtRPCPort";
             this.txtRPCPort.Size = new System.Drawing.Size(75, 20);
@@ -167,6 +190,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.SystemColors.Info;
             this.label6.Location = new System.Drawing.Point(179, 176);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 13);
@@ -175,6 +199,9 @@
             // 
             // txtPort
             // 
+            this.txtPort.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPort.ForeColor = System.Drawing.SystemColors.Info;
             this.txtPort.Location = new System.Drawing.Point(214, 173);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(75, 20);
@@ -187,7 +214,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLogs.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtLogs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(194)))), ((int)(((byte)(191)))));
+            this.txtLogs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLogs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtLogs.Location = new System.Drawing.Point(342, 38);
             this.txtLogs.Multiline = true;
             this.txtLogs.Name = "txtLogs";
@@ -200,17 +228,21 @@
             // btnStartStop
             // 
             this.btnStartStop.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnStartStop.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnStartStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnStartStop.Location = new System.Drawing.Point(12, 381);
             this.btnStartStop.Name = "btnStartStop";
             this.btnStartStop.Size = new System.Drawing.Size(150, 77);
             this.btnStartStop.TabIndex = 21;
             this.btnStartStop.Text = "START";
-            this.btnStartStop.UseVisualStyleBackColor = true;
+            this.btnStartStop.UseVisualStyleBackColor = false;
             this.btnStartStop.Click += new System.EventHandler(this.btnStartStop_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.Info;
             this.label3.Location = new System.Drawing.Point(18, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
@@ -220,6 +252,7 @@
             // chkPrimary
             // 
             this.chkPrimary.AutoSize = true;
+            this.chkPrimary.ForeColor = System.Drawing.SystemColors.Info;
             this.chkPrimary.Location = new System.Drawing.Point(204, 151);
             this.chkPrimary.Name = "chkPrimary";
             this.chkPrimary.Size = new System.Drawing.Size(109, 17);
@@ -239,6 +272,9 @@
             // 
             // lstStaticNodes
             // 
+            this.lstStaticNodes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lstStaticNodes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lstStaticNodes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.lstStaticNodes.Location = new System.Drawing.Point(7, 20);
             this.lstStaticNodes.Name = "lstStaticNodes";
             this.lstStaticNodes.Size = new System.Drawing.Size(306, 138);
@@ -269,7 +305,7 @@
             this.groupBox3.Size = new System.Drawing.Size(324, 203);
             this.groupBox3.TabIndex = 33;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Genel Bilgiler";
+            this.groupBox3.Text = "General Info";
             // 
             // backgroundWorkerProcessHandler
             // 
@@ -278,6 +314,9 @@
             // 
             // txtCommands
             // 
+            this.txtCommands.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtCommands.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCommands.ForeColor = System.Drawing.SystemColors.Info;
             this.txtCommands.Location = new System.Drawing.Point(342, 12);
             this.txtCommands.Name = "txtCommands";
             this.txtCommands.Size = new System.Drawing.Size(247, 20);
@@ -286,36 +325,44 @@
             // 
             // btnPeerCount
             // 
+            this.btnPeerCount.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnPeerCount.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPeerCount.Location = new System.Drawing.Point(943, 11);
             this.btnPeerCount.Name = "btnPeerCount";
             this.btnPeerCount.Size = new System.Drawing.Size(75, 23);
             this.btnPeerCount.TabIndex = 35;
             this.btnPeerCount.Text = "Peer Count";
-            this.btnPeerCount.UseVisualStyleBackColor = true;
+            this.btnPeerCount.UseVisualStyleBackColor = false;
             this.btnPeerCount.Click += new System.EventHandler(this.btnPeerCount_Click);
             // 
             // btnNodeInfo
             // 
+            this.btnNodeInfo.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnNodeInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNodeInfo.Location = new System.Drawing.Point(595, 11);
             this.btnNodeInfo.Name = "btnNodeInfo";
             this.btnNodeInfo.Size = new System.Drawing.Size(75, 23);
             this.btnNodeInfo.TabIndex = 36;
             this.btnNodeInfo.Text = "Node Info";
-            this.btnNodeInfo.UseVisualStyleBackColor = true;
+            this.btnNodeInfo.UseVisualStyleBackColor = false;
             this.btnNodeInfo.Click += new System.EventHandler(this.btnNodeInfo_Click);
             // 
             // btnConnectedPeers
             // 
+            this.btnConnectedPeers.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnConnectedPeers.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnConnectedPeers.Location = new System.Drawing.Point(834, 11);
             this.btnConnectedPeers.Name = "btnConnectedPeers";
             this.btnConnectedPeers.Size = new System.Drawing.Size(103, 23);
             this.btnConnectedPeers.TabIndex = 37;
             this.btnConnectedPeers.Text = "Connected Peers";
-            this.btnConnectedPeers.UseVisualStyleBackColor = true;
+            this.btnConnectedPeers.UseVisualStyleBackColor = false;
             this.btnConnectedPeers.Click += new System.EventHandler(this.btnConnectedPeers_Click);
             // 
             // nmrcVerbosity
             // 
+            this.nmrcVerbosity.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.nmrcVerbosity.ForeColor = System.Drawing.SystemColors.Info;
             this.nmrcVerbosity.Location = new System.Drawing.Point(732, 12);
             this.nmrcVerbosity.Maximum = new decimal(new int[] {
             6,
@@ -340,6 +387,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.Info;
             this.label7.Location = new System.Drawing.Point(676, 15);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 13);
@@ -349,18 +397,22 @@
             // btnMine
             // 
             this.btnMine.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnMine.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnMine.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnMine.Location = new System.Drawing.Point(186, 381);
             this.btnMine.Name = "btnMine";
             this.btnMine.Size = new System.Drawing.Size(150, 77);
             this.btnMine.TabIndex = 40;
             this.btnMine.Text = "START MINING";
-            this.btnMine.UseVisualStyleBackColor = true;
+            this.btnMine.UseVisualStyleBackColor = false;
             this.btnMine.Click += new System.EventHandler(this.btnMine_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1022, 463);
             this.Controls.Add(this.btnMine);
             this.Controls.Add(this.label7);
@@ -373,6 +425,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnStartStop);
             this.Controls.Add(this.txtLogs);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Node Runner v0.0.1";
