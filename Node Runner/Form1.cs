@@ -310,7 +310,7 @@ namespace Node_Runner
             if (activeNode.Verbosity > 0)
                 gethChainCommand.Append(" --verbosity ").Append(activeNode.Verbosity);
 
-            gethChainCommand.Append(" --datadir ").Append(activeNode.DataDirPath)
+            gethChainCommand.Append(" --datadir \"").Append(activeNode.DataDirPath).Append("\"")
             .Append(" --identity ").Append(activeNode.NodeName);
 
 
@@ -397,7 +397,7 @@ namespace Node_Runner
             activeNode.MaxPeers = 15;
             activeNode.NodeName = txtNodeID.Text;
             activeNode.NetworkID = int.Parse(txtNetworkID.Text);
-            activeNode.Port = (chkPrimary.Checked ? 0 : int.Parse(txtRPCPort.Text));
+            activeNode.Port = (chkPrimary.Checked ? 0 : int.Parse(txtPort.Text));
             activeNode.RpcPort = int.Parse(txtRPCPort.Text);
             activeNode.IPCPath = (chkPrimary.Checked ? null : "--ipcpath ~/Library/Ethereum/" + activeNode.NodeName + "/geth.ipc");
             activeNode.DataDirPath = txtDataFolder.Text;

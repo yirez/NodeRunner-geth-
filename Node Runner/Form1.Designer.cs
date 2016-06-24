@@ -49,6 +49,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.chkPrimary = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lstStaticNodes = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.backgroundWorkerProcessHandler = new System.ComponentModel.BackgroundWorker();
             this.txtCommands = new System.Windows.Forms.TextBox();
@@ -58,7 +59,6 @@
             this.nmrcVerbosity = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.btnMine = new System.Windows.Forms.Button();
-            this.lstStaticNodes = new System.Windows.Forms.ListView();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcVerbosity)).BeginInit();
@@ -183,7 +183,8 @@
             // 
             // txtLogs
             // 
-            this.txtLogs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLogs.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.txtLogs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(194)))), ((int)(((byte)(191)))));
@@ -198,8 +199,7 @@
             // 
             // btnStartStop
             // 
-            this.btnStartStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartStop.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnStartStop.Location = new System.Drawing.Point(12, 381);
             this.btnStartStop.Name = "btnStartStop";
             this.btnStartStop.Size = new System.Drawing.Size(150, 77);
@@ -236,6 +236,16 @@
             this.groupBox2.TabIndex = 32;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Static Nodes";
+            // 
+            // lstStaticNodes
+            // 
+            this.lstStaticNodes.Location = new System.Drawing.Point(7, 20);
+            this.lstStaticNodes.Name = "lstStaticNodes";
+            this.lstStaticNodes.Size = new System.Drawing.Size(306, 138);
+            this.lstStaticNodes.TabIndex = 0;
+            this.lstStaticNodes.UseCompatibleStateImageBehavior = false;
+            this.lstStaticNodes.View = System.Windows.Forms.View.List;
+            this.lstStaticNodes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstStaticNodes_KeyUp);
             // 
             // groupBox3
             // 
@@ -338,8 +348,7 @@
             // 
             // btnMine
             // 
-            this.btnMine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMine.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnMine.Location = new System.Drawing.Point(186, 381);
             this.btnMine.Name = "btnMine";
             this.btnMine.Size = new System.Drawing.Size(150, 77);
@@ -347,16 +356,6 @@
             this.btnMine.Text = "START MINING";
             this.btnMine.UseVisualStyleBackColor = true;
             this.btnMine.Click += new System.EventHandler(this.btnMine_Click);
-            // 
-            // lstStaticNodes
-            // 
-            this.lstStaticNodes.Location = new System.Drawing.Point(7, 20);
-            this.lstStaticNodes.Name = "lstStaticNodes";
-            this.lstStaticNodes.Size = new System.Drawing.Size(306, 138);
-            this.lstStaticNodes.TabIndex = 0;
-            this.lstStaticNodes.UseCompatibleStateImageBehavior = false;
-            this.lstStaticNodes.View = System.Windows.Forms.View.List;
-            this.lstStaticNodes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstStaticNodes_KeyUp);
             // 
             // Form1
             // 
