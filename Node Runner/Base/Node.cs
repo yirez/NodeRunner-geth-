@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Node_Runner.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Node_Runner
         public int BlockChainVersion { get; set; }
         public string IPCPath { get; set; }
         public int MaxPeers { get; set; }
-        public int Verbosity { get; set; }
+        public int Verbosity { get; set; }  
+        public RPCExposeData RPCData{ get; set; } 
     }
 }

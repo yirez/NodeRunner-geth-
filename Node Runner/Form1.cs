@@ -6,9 +6,12 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
-using System.Threading; 
+using System.Threading;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Node_Runner
 {
@@ -18,12 +21,20 @@ namespace Node_Runner
         private static bool isMining = false;
         private static Node activeNode = null;
         private Process process = null;
-
+        private List<Node> nodeList=null;
 
         public Form1()
         {
             InitializeComponent(); 
             toggleGethFunctionalityButtons(false,false);
+            txtRPCExposeHost.Text = GetLocalIPAddress();
+            lstRPCExposeAPIs.SetSelected(0, true);
+            lstRPCExposeAPIs.SetSelected(1, true);
+            lstRPCExposeAPIs.SetSelected(2, true); 
+            nodeList=new List<Node>();
+            nodeList = loadActiveNodeData();
+            if(nodeList!=null)
+                refreshPreviousNodeList(false);
         }
 
         #region UI interactions
@@ -52,7 +63,7 @@ namespace Node_Runner
             try
             { 
                 toggleGethFunctionalityButtons(false,false);
-                btnStartStop.Enabled = false;
+                btnStartStop.Enabled = false; 
                 isMining = true;
                 refreshStaticNodeList();
                 if (!isRunning)
@@ -69,7 +80,7 @@ namespace Node_Runner
             }
             catch (Exception ex)
             {
-                btnStartStop.Enabled = true;
+                btnStartStop.Enabled = true; 
                 isRunning = false;
                 btnMine.Text = "START MINING";
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -105,7 +116,7 @@ namespace Node_Runner
                 {
                     backgroundWorkerProcessHandler.RunWorkerAsync(); 
                     btnStartStop.Text = "STOP"; 
-                    toggleGethFunctionalityButtons(true, false);
+                    //toggleGethFunctionalityButtons(true, false);
                 }
                 else
                 {
@@ -178,13 +189,37 @@ namespace Node_Runner
 
         }
 
+        private void refreshPreviousNodeList(bool invokeRequired=true)
+        {
+            lstPrevNodes.Items.Clear();
+
+            if (nodeList==null)
+                return;
+
+
+            foreach (Node node in nodeList)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Tag = node;
+                item.Text = node.NodeName;
+                if (invokeRequired)
+                    Invoke(new Action(() => lstPrevNodes.Items.Add(item)));
+                else
+                    lstPrevNodes.Items.Add(item);
+            }
+
+        }
+
         private void CopySelectedValuesToClipboard()
         {
-            var builder = new StringBuilder();
-            foreach (ListViewItem item in lstStaticNodes.SelectedItems)
-                builder.AppendLine(item.SubItems[0].Text);
+            if (lstStaticNodes.SelectedItems != null)
+            {
+                var builder = new StringBuilder();
+                foreach (ListViewItem item in lstStaticNodes.SelectedItems)
+                    builder.AppendLine(item.SubItems[0].Text);
+                Clipboard.SetText(builder.ToString());
+            }
 
-            Clipboard.SetText(builder.ToString());
         }
         private void toggleGethFunctionalityButtons(bool status,bool invokeRequired=true)
         {
@@ -195,6 +230,7 @@ namespace Node_Runner
                 Invoke(new Action(() => btnPeerCount.Enabled = status));
                 Invoke(new Action(() => nmrcVerbosity.Enabled = status));
                 Invoke(new Action(() => txtCommands.Enabled = status));
+                Invoke(new Action(() => btnStartRPC.Enabled = status));
             }
             else
             {
@@ -203,6 +239,7 @@ namespace Node_Runner
                 btnPeerCount.Enabled = status;
                 nmrcVerbosity.Enabled = status;
                 txtCommands.Enabled = status;
+                btnStartRPC.Enabled = status;
             }
         }
 
@@ -250,7 +287,18 @@ namespace Node_Runner
                 throw new Exception("Node name cannot be empty");
         }
         #endregion
-
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            return "Local IP Address Not Found!";
+        }
          
         private void startContainerCommandProcess(string parameters)
         { 
@@ -272,7 +320,14 @@ namespace Node_Runner
             using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
             {
                 process.OutputDataReceived += (sender, e) =>
-                { 
+                {
+                    //below means the server succesffuly started 
+                    //TODO something more concrete to check server start would be better
+                    if (e.Data != null && e.Data.Contains("at block:"))
+                    {
+                        toggleGethFunctionalityButtons(true);
+                        saveActiveNodeData();
+                    }
                     Invoke(new Action(() => txtLogs.AppendText(e.Data + Environment.NewLine)));
                 };
                 process.ErrorDataReceived += (sender, e) =>
@@ -408,6 +463,49 @@ namespace Node_Runner
             }
 
             activeNode.GenesisFilePath = txtGenesisFilePath.Text;
+        }
+        private void saveActiveNodeData()
+        {
+            if (nodeList!=null && !nodeList.Any(x => x.NodeName.Equals(activeNode.NodeName, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                nodeList.Add(activeNode);
+                XmlSerializer xs = new XmlSerializer(typeof(List<Node>));
+                TextWriter tw = new StreamWriter("nodeList.xml");
+                xs.Serialize(tw, nodeList);
+                tw.Close();
+            }
+            nodeList = loadActiveNodeData();
+            refreshPreviousNodeList();
+        }
+
+        private List<Node> loadActiveNodeData()
+        {
+            if (!File.Exists("nodeList.xml"))
+                return new List<Node>();
+
+            XmlSerializer xs = new XmlSerializer(typeof(List<Node>));
+            using (var sr = new StreamReader("nodeList.xml"))
+            {
+                return (List<Node>)xs.Deserialize(sr);
+            }
+        }
+        private void btnStartRPC_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstPrevNodes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lstPrevNodes.SelectedItems!=null)
+            {
+                activeNode = (Node)lstPrevNodes.SelectedItems[0].Tag;
+                txtDataFolder.Text = activeNode.DataDirPath;
+                txtGenesisFilePath.Text = activeNode.GenesisFilePath;
+                txtNetworkID.Text = activeNode.NetworkID.ToString();
+                txtNodeID.Text = activeNode.NodeName;
+                txtPort.Text = activeNode.Port.ToString();
+                txtRPCPort.Text = activeNode.RpcPort.ToString();
+            }
         } 
        
     }
