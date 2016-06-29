@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Node_Runner.Base;
+using Node_Runner.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,73 +19,228 @@ namespace Node_Runner
 {
     public partial class Form1 : Form
     {
-        private static bool isRunning = false;
-        private static bool isMining = false;
-        private static Node activeNode = null;
-        private Process process = null;
-        private List<Node> nodeList=null;
-
+        private GethHelper gethHelper = null;
+        private GenericHelper genericHelper = new GenericHelper();
         public Form1()
         {
             InitializeComponent(); 
             toggleGethFunctionalityButtons(false,false);
-            txtRPCExposeHost.Text = GetLocalIPAddress();
+            txtRPCExposeHost.Text = genericHelper.GetLocalIPAddress();
             lstRPCExposeAPIs.SetSelected(0, true);
             lstRPCExposeAPIs.SetSelected(1, true);
-            lstRPCExposeAPIs.SetSelected(2, true); 
-            nodeList=new List<Node>();
-            nodeList = loadActiveNodeData();
-            if(nodeList!=null)
+            lstRPCExposeAPIs.SetSelected(2, true);
+
+            gethHelper = new GethHelper(this);
+            if (gethHelper.NodeList != null)
                 refreshPreviousNodeList(false);
         }
 
-        #region UI interactions
+        #region UI interactions        
+        private void btnStartRPC_Click(object sender, EventArgs e)
+        {
+            gethHelper.SendCommandToConsole("admin.startRPC(\""
+                + txtRPCExposeHost.Text + "\",\""
+                + txtRPCExposePort.Text + "\",\""
+                + txtRPCExposeCors.Text + "\")"
+                , gethHelper.SelectedActivity.ConnectedProcess);
+
+        }
+
+        private void lstPrevNodes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstPrevNodes.SelectedItems != null && lstPrevNodes.SelectedItems.Count > 0)
+            {
+                Node node = (Node)lstPrevNodes.SelectedItems[0].Tag;
+                txtDataFolder.Text = node.DataDirPath;
+                txtGenesisFilePath.Text = node.GenesisFilePath;
+                txtNetworkID.Text = node.NetworkID.ToString();
+                txtNodeID.Text = node.NodeName;
+                txtPort.Text = node.Port.ToString();
+                txtRPCPort.Text = node.RpcPort.ToString();
+            }
+        }
+        private void handleTabSelectionChanges()
+        {
+            gethHelper.SelectedActivity = getSelectedTabActivity();
+            if (gethHelper.SelectedActivity != null)
+            {
+                txtDataFolder.Text = gethHelper.SelectedActivity.ActiveNode.DataDirPath;
+                txtGenesisFilePath.Text = gethHelper.SelectedActivity.ActiveNode.GenesisFilePath;
+                txtNetworkID.Text = gethHelper.SelectedActivity.ActiveNode.NetworkID.ToString();
+                txtNodeID.Text = gethHelper.SelectedActivity.ActiveNode.NodeName;
+                txtPort.Text = gethHelper.SelectedActivity.ActiveNode.Port.ToString();
+                txtRPCPort.Text = gethHelper.SelectedActivity.ActiveNode.RpcPort.ToString();
+
+                if (!gethHelper.SelectedActivity.IsRunning)
+                {
+                    btnStartStop.Text = "START";
+                    btnMine.Text = "START MINING";
+                    toggleGethFunctionalityButtons(false, false);
+                }
+                else
+                {
+                    btnStartStop.Text = "STOP";
+                    if (gethHelper.SelectedActivity.IsMining)
+                        btnMine.Text = "STOP MINING";
+                    toggleGethFunctionalityButtons(true, false);
+                }
+            }
+            else
+            {
+                txtDataFolder.Text = string.Empty;
+                txtGenesisFilePath.Text = string.Empty;
+                txtNetworkID.Text = string.Empty;
+                txtNodeID.Text = string.Empty;
+                txtPort.Text = string.Empty;
+                txtRPCPort.Text = string.Empty;
+            }
+
+            // find if any tab is closed, start close operations if so.
+            if (customTabControl1.TabCount != gethHelper.ActiveNodeList.Count)
+            {
+                for (int i = 0; i < gethHelper.ActiveNodeList.ToList().Count; i++)
+                {
+                    NodeActivity act = gethHelper.ActiveNodeList[i];
+                    if (!customTabControl1.TabPages.Contains(act.ParentTab))
+                    {
+                        stopActivity(act);
+                    }
+                }
+            }
+
+        }
+        private void customTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            handleTabSelectionChanges();
+        }
+        private void lstPrevNodes_MouseUp(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+
+                // Right mouse click
+                case MouseButtons.Right:
+
+
+                    ContextMenu myContextMenu = new ContextMenu();
+                     
+                    MenuItem menuItem1 = new MenuItem("Delete"); 
+
+
+                    // Clear all previously added MenuItems.
+                    myContextMenu.MenuItems.Clear(); 
+                    myContextMenu.MenuItems.Add(menuItem1); 
+                    myContextMenu.Show(lstPrevNodes, e.Location, LeftRightAlignment.Right); 
+                    menuItem1.Click += new System.EventHandler(deleteSelectedPreviousNode); 
+                    break;
+
+            }
+        }
+
+        private void txtNodeID_TextChanged(object sender, EventArgs e)
+        {
+
+            if (gethHelper.ActiveNodeList == null || !gethHelper.ActiveNodeList.Any(x => x.ActiveNode.NodeName.Equals(txtNodeID.Text)))
+            {
+                btnStartStop.Text = "START";
+                btnMine.Text = "START MINING";
+                btnMine.Enabled = true;
+                btnStartStop.Enabled = true;
+                toggleGethFunctionalityButtons(false, false);
+            }
+            else
+            {
+                NodeActivity activity = gethHelper.ActiveNodeList.First(x => x.ActiveNode.NodeName.Equals(txtNodeID.Text));
+                btnStartStop.Text = "STOP";
+                if (activity.IsMining)
+                {
+                    btnMine.Text = "STOP MINING"; 
+                    btnMine.Enabled = true;
+                }
+                else
+                {
+                    btnMine.Text = "START MINING";
+                    btnMine.Enabled = false; 
+                }
+                toggleGethFunctionalityButtons(true, false);
+            }
+        }
         private void nmrcVerbosity_ValueChanged(object sender, EventArgs e)
         {
-            sendCommandToConsole("debug.verbosity(" + nmrcVerbosity.Value + ")"); 
+            gethHelper.SendCommandToConsole("debug.verbosity(" + nmrcVerbosity.Value + ")", gethHelper.SelectedActivity.ConnectedProcess);
         }
 
         private void btnPeerCount_Click(object sender, EventArgs e)
         {
-            sendCommandToConsole("net.peerCount"); 
+            gethHelper.SendCommandToConsole("net.peerCount", gethHelper.SelectedActivity.ConnectedProcess);
         }
 
         private void btnConnectedPeers_Click(object sender, EventArgs e)
         {
-            sendCommandToConsole("admin.peers"); 
+            gethHelper.SendCommandToConsole("admin.peers", gethHelper.SelectedActivity.ConnectedProcess); ;
         }
 
         private void btnNodeInfo_Click(object sender, EventArgs e)
         {
-            sendCommandToConsole("admin.nodeInfo"); 
+            gethHelper.SendCommandToConsole("admin.nodeInfo", gethHelper.SelectedActivity.ConnectedProcess);
         }
 
         private void btnMine_Click(object sender, EventArgs e)
         {
+            NodeActivity activity = new NodeActivity();
             try
-            { 
-                toggleGethFunctionalityButtons(false,false);
-                btnStartStop.Enabled = false; 
-                isMining = true;
-                refreshStaticNodeList();
-                if (!isRunning)
+            {
+                if (gethHelper.ActiveNodeList.Any(x => x.ActiveNode.NodeName.Equals(txtNodeID.Text)))
+                    activity = gethHelper.ActiveNodeList.First(x => x.ActiveNode.NodeName.Equals(txtNodeID.Text));
+                else
                 {
-                    backgroundWorkerProcessHandler.RunWorkerAsync();
+                    activity.IsRunning = false;
+                    activity.ActiveNode = createNode();
+                    createTabAndConsole(activity);
+                }
+
+                btnStartStop.Enabled = false;
+                activity.IsMining = true;
+                refreshStaticNodeList();
+
+                if (!activity.IsRunning)
+                {
+                    activity.IsRunning = true;
+                    var bw = new BackgroundWorker();
+                    activity.WorkerThread = bw;
+                    gethHelper.ActiveNodeList.Add(activity);
+                    toggleGethFunctionalityButtons(true,false);
+                    gethHelper.SaveActiveNodeData(activity.ActiveNode);
+                    gethHelper.SelectedActivity = activity;
+                    handleTabSelectionChanges();
+
+                    refreshPreviousNodeList();
+
+                    bw.WorkerSupportsCancellation = true;
+                    bw.DoWork += delegate
+                    {
+                        gethHelper.StartGeth(activity);
+                    };
+                    bw.RunWorkerCompleted += delegate
+                    {
+
+                        stopActivity(activity);
+                    };
+                    bw.RunWorkerAsync();
                     btnMine.Text = "STOP MINING";
+
                 }
                 else
                 {
-                    backgroundWorkerProcessHandler.CancelAsync();
-                    stopGeth();
-                    btnMine.Text = "START MINING";
+                    stopActivity(activity);
                 }
             }
             catch (Exception ex)
             {
-                btnStartStop.Enabled = true; 
-                isRunning = false;
+                btnStartStop.Enabled = true;
+                activity.IsRunning = false;
                 btnMine.Text = "START MINING";
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); 
             }
         } 
         private void btnFindGenesis_Click(object sender, EventArgs e)
@@ -107,30 +264,62 @@ namespace Node_Runner
         }
         private void btnStartStop_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtNetworkID.Text) || string.IsNullOrEmpty(txtNodeID.Text))
+                return;
+
+            NodeActivity activity = new NodeActivity();
             try
-            {
-                btnMine.Enabled = false;
-                isMining=false;
-                refreshStaticNodeList();
-                if (!isRunning)
+            { 
+                if (gethHelper.ActiveNodeList.Any(x => x.ActiveNode.NodeName.Equals(txtNodeID.Text)))
+                    activity = gethHelper.ActiveNodeList.First(x => x.ActiveNode.NodeName.Equals(txtNodeID.Text));
+                else
                 {
-                    backgroundWorkerProcessHandler.RunWorkerAsync(); 
-                    btnStartStop.Text = "STOP"; 
-                    //toggleGethFunctionalityButtons(true, false);
+                    activity.IsRunning = false;
+                    activity.ActiveNode = createNode();
+                    createTabAndConsole(activity);
+                }
+
+                activity.IsMining = false;
+                btnMine.Enabled = false;
+                refreshStaticNodeList();
+
+                if (!activity.IsRunning)
+                {
+                    activity.IsRunning = true;
+                    var bw = new BackgroundWorker();
+                    activity.WorkerThread = bw;
+
+                    gethHelper.ActiveNodeList.Add(activity);
+                    toggleGethFunctionalityButtons(true,false);
+                    gethHelper.SaveActiveNodeData(activity.ActiveNode);
+                    gethHelper.SelectedActivity = activity;
+                    handleTabSelectionChanges();
+
+                    refreshPreviousNodeList();
+
+                    bw.WorkerSupportsCancellation = true;
+                    bw.DoWork += delegate
+                    {
+
+                        gethHelper.StartGeth(activity);
+                    };
+                    bw.RunWorkerCompleted += delegate
+                    {
+
+                        stopActivity(activity);
+                    };
+                    bw.RunWorkerAsync();
+                    btnStartStop.Text = "STOP";
                 }
                 else
                 {
-                    btnMine.Enabled = true;
-                    backgroundWorkerProcessHandler.CancelAsync();
-                    stopGeth();
-                    btnStartStop.Text = "START"; 
-                    toggleGethFunctionalityButtons(false, false);
+                    stopActivity(activity); 
                 }
             }
             catch (Exception ex)
             {
                 btnMine.Enabled = true;
-                isRunning = false;
+                activity.IsRunning = false;
                 btnStartStop.Text = "START";
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
@@ -148,13 +337,14 @@ namespace Node_Runner
         {
             if (e.KeyCode == Keys.Enter)
             {
-                sendCommandToConsole(txtCommands.Text);  
+                gethHelper.SendCommandToConsole(txtCommands.Text, gethHelper.SelectedActivity.ConnectedProcess);
 
                 if (txtCommands.Text.Contains("exit"))
                 {
-                    backgroundWorkerProcessHandler.CancelAsync();
-                    stopGeth();
-                    btnStartStop.Text = "START";
+                    if (gethHelper.SelectedActivity != null)
+                    {
+                        stopActivity(gethHelper.SelectedActivity);
+                    }
                 }
                 txtCommands.Text = string.Empty;
 
@@ -166,12 +356,29 @@ namespace Node_Runner
             if (sender != lstStaticNodes) return;
 
             if (e.Control && e.KeyCode == Keys.C)
-                CopySelectedValuesToClipboard();
+                copySelectedValuesToClipboard();
         } 
 
         #endregion
 
         #region UI support methods
+        private NodeActivity getSelectedTabActivity()
+        {
+            if (customTabControl1.SelectedTab != null)
+            {
+                return gethHelper.ActiveNodeList.FirstOrDefault(x => x.ParentTab == customTabControl1.SelectedTab);
+            }
+
+            return null;
+        }
+
+        private void deleteSelectedPreviousNode(object sender, EventArgs e)
+        {
+            if (lstPrevNodes.SelectedItems != null && lstPrevNodes.SelectedItems.Count > 0)
+            {
+                lstPrevNodes.Items.Remove(lstPrevNodes.SelectedItems[0]);
+            }
+        }
         private void refreshStaticNodeList()
         {
             lstStaticNodes.Items.Clear();
@@ -191,13 +398,17 @@ namespace Node_Runner
 
         private void refreshPreviousNodeList(bool invokeRequired=true)
         {
-            lstPrevNodes.Items.Clear();
+            if (invokeRequired)
+                Invoke(new Action(() => lstPrevNodes.Items.Clear()));
+            else
+                lstPrevNodes.Items.Clear();
+            
 
-            if (nodeList==null)
+            if (gethHelper.NodeList==null)
                 return;
 
 
-            foreach (Node node in nodeList)
+            foreach (Node node in gethHelper.NodeList)
             {
                 ListViewItem item = new ListViewItem();
                 item.Tag = node;
@@ -210,7 +421,7 @@ namespace Node_Runner
 
         }
 
-        private void CopySelectedValuesToClipboard()
+        private void copySelectedValuesToClipboard()
         {
             if (lstStaticNodes.SelectedItems != null)
             {
@@ -230,7 +441,6 @@ namespace Node_Runner
                 Invoke(new Action(() => btnPeerCount.Enabled = status));
                 Invoke(new Action(() => nmrcVerbosity.Enabled = status));
                 Invoke(new Action(() => txtCommands.Enabled = status));
-                Invoke(new Action(() => btnStartRPC.Enabled = status));
             }
             else
             {
@@ -239,41 +449,41 @@ namespace Node_Runner
                 btnPeerCount.Enabled = status;
                 nmrcVerbosity.Enabled = status;
                 txtCommands.Enabled = status;
-                btnStartRPC.Enabled = status;
             }
         }
 
-        private void sendCommandToConsole(string command)
+        //add node to active node list and create tab page with console
+        private void createTabAndConsole(NodeActivity nodeActivity)
         {
-            process.StandardInput.WriteLine(command);
-            process.StandardInput.Flush();
+            var page = new TabPage(nodeActivity.ActiveNode.NodeName);
+            var txtConsole = new TextBox();
+            txtConsole.Dock = DockStyle.Fill;
+            txtConsole.BorderStyle = BorderStyle.None;
+            txtConsole.BackColor = Color.Black;
+            txtConsole.Multiline = true;
+            txtConsole.Name = "txt" + nodeActivity.ActiveNode.NodeName;
+            txtConsole.ScrollBars = ScrollBars.Both;
+            txtConsole.ForeColor = SystemColors.Info;
+            txtConsole.BackColor = Color.FromArgb(64, 64, 64);
+
+            txtConsole.WordWrap = false;
+            txtConsole.ReadOnly = true;
+
+            page.Controls.Add(txtConsole);
+            customTabControl1.TabPages.Add(page);
+            customTabControl1.SelectedTab = page;
+            page.Select();
+
+            nodeActivity.OutputConsole = txtConsole;
+            nodeActivity.ParentTab = page;
         }
+
         #endregion
-
-        #region Command handler thread
-
-        private void backgroundWorkerProcessHandler_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                createNode();
-                startGeth();
-            }
-            catch (Exception ex)
-            {
-
-                toggleGethFunctionalityButtons(false);
-                isRunning = false;
-                Invoke(new Action(() => btnStartStop.Text = "START"));
-                Invoke(new Action(() => MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)));
-            }
-        }
-        #endregion
+         
 
         #region Assertions
         private void assertDataValid()
-        {
-
+        { 
             if (!Directory.Exists(txtDataFolder.Text) || string.IsNullOrEmpty(txtDataFolder.Text))
                 throw new Exception("Data directory path does not exist. Create a data directory with a genesis file.");
 
@@ -287,167 +497,17 @@ namespace Node_Runner
                 throw new Exception("Node name cannot be empty");
         }
         #endregion
-        public static string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-            return "Local IP Address Not Found!";
-        }
-         
-        private void startContainerCommandProcess(string parameters)
-        { 
-            string gethPath = activeNode.DataDirPath.Remove(activeNode.DataDirPath.LastIndexOf("\\"));
-            process = new Process();
-
-            process.StartInfo.FileName = Path.Combine(gethPath, "geth.exe");
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.Arguments = parameters;
-
-            StringBuilder output = new StringBuilder();
-            StringBuilder error = new StringBuilder();
-
-            using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
-            using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
-            {
-                process.OutputDataReceived += (sender, e) =>
-                {
-                    //below means the server succesffuly started 
-                    //TODO something more concrete to check server start would be better
-                    if (e.Data != null && e.Data.Contains("at block:"))
-                    {
-                        toggleGethFunctionalityButtons(true);
-                        saveActiveNodeData();
-                    }
-                    Invoke(new Action(() => txtLogs.AppendText(e.Data + Environment.NewLine)));
-                };
-                process.ErrorDataReceived += (sender, e) =>
-                {
-                    Invoke(new Action(() => txtLogs.AppendText(e.Data + Environment.NewLine)));
-                };
-
-
-                process.Start();
-                process.BeginOutputReadLine();
-                process.BeginErrorReadLine();
-
-                //takes some time to get geth running
-                Thread.Sleep(2000); 
-                process.WaitForExit();
-            }
-        }
-
-        private string formGethStartString()
-        {
-            StringBuilder gethChainCommand = new StringBuilder();
-            //nothing in chain (no chain data), must have genesis to rebuild
-            if (!Directory.Exists(Path.Combine(activeNode.DataDirPath, "chaindata")) 
-                || Directory.GetFiles(Path.Combine(activeNode.DataDirPath, "chaindata")).Length == 0)
-            {
-                gethChainCommand.Append(" --genesis ").Append(activeNode.GenesisFilePath);
-            }
-
-            if (!chkPrimary.Checked)
-            {
-                gethChainCommand.Append(" --port ").Append(activeNode.Port);
-                gethChainCommand.Append(" --ipcpath ~/Library/Ethereum/").Append(activeNode.NodeName).Append("/geth.ipc");
-            }
-
-            if (activeNode.Verbosity > 0)
-                gethChainCommand.Append(" --verbosity ").Append(activeNode.Verbosity);
-
-            gethChainCommand.Append(" --datadir \"").Append(activeNode.DataDirPath).Append("\"")
-            .Append(" --identity ").Append(activeNode.NodeName);
-
-
-            if (activeNode.BlockChainVersion > 0)
-                gethChainCommand.Append(" --blockchainversion ").Append(activeNode.BlockChainVersion);
-
-
-            gethChainCommand.Append(" --networkid ").Append(activeNode.NetworkID)
-            .Append(" --rpcport ").Append(activeNode.RpcPort);
-
-            if (activeNode.MaxPeers > 0)
-                gethChainCommand.Append(" --maxpeers ").Append(activeNode.MaxPeers);
-
-            gethChainCommand.Append(" console ");
-
-            return gethChainCommand.ToString();
-        }
-
-        private string formGethMiningString()
-        {
-            StringBuilder gethChainCommand = new StringBuilder(); 
-
-            if (!chkPrimary.Checked)
-            {
-                gethChainCommand.Append(" --port ").Append(activeNode.Port);
-                gethChainCommand.Append(" --ipcpath ~/Library/Ethereum/").Append(activeNode.NodeName).Append("/geth.ipc");
-            }
-
-            if (activeNode.Verbosity > 0)
-                gethChainCommand.Append(" --verbosity ").Append(activeNode.Verbosity);
-
-            gethChainCommand.Append(" --datadir ").Append(activeNode.DataDirPath)
-            .Append(" --identity ").Append(activeNode.NodeName);
-
-
-            if (activeNode.BlockChainVersion > 0)
-                gethChainCommand.Append(" --blockchainversion ").Append(activeNode.BlockChainVersion);
-
-
-            gethChainCommand.Append(" --networkid ").Append(activeNode.NetworkID)
-            .Append(" --rpcport ").Append(activeNode.RpcPort);
-
-            if (activeNode.MaxPeers > 0)
-                gethChainCommand.Append(" --maxpeers ").Append(activeNode.MaxPeers);
-
-            gethChainCommand.Append(" --mine -rpccorsdomain \"*\" --ipcapi \"admin,eth,miner\" --rpcapi \"eth,web3\" --networkid 2147483645 --blockchainversion 12 -maxpeers 5 --minerthreads 1 console ");
-
-            return gethChainCommand.ToString();
-        }
-
-        /// <summary>
-        /// starts geth with a string formed with global node object
-        /// </summary>
-        private void startGeth()
-        {
-            isRunning = true;
-            string gethStartCommand = formGethStartString();
-            if(isMining)
-              gethStartCommand = formGethMiningString();
-
-            startContainerCommandProcess(gethStartCommand); 
-        }
-
-        /// <summary>
-        /// forces geth exit and closes process
-        /// </summary>
-        private void stopGeth()
-        {
-            isRunning = false;
-            sendCommandToConsole("exit"); 
-            process.StandardInput.Close(); 
-            process.Close(); 
-        }
-
+          
         /// <summary>
         /// creates a global node object with some default elements like verbocity and peercount
         /// </summary>
-        private void createNode()
+        private Node createNode()
         {
+            Node activeNode=new Node();
             assertDataValid();
 
             activeNode = new Node();
+            activeNode.IsPrimary = chkPrimary.Checked;
             activeNode.BlockChainVersion = 12;
             activeNode.MaxPeers = 15;
             activeNode.NodeName = txtNodeID.Text;
@@ -456,6 +516,11 @@ namespace Node_Runner
             activeNode.RpcPort = int.Parse(txtRPCPort.Text);
             activeNode.IPCPath = (chkPrimary.Checked ? null : "--ipcpath ~/Library/Ethereum/" + activeNode.NodeName + "/geth.ipc");
             activeNode.DataDirPath = txtDataFolder.Text;
+            activeNode.GethPath = activeNode.DataDirPath.Remove(activeNode.DataDirPath.LastIndexOf("\\"));
+
+
+            if (!Directory.Exists(activeNode.GethPath) || !File.Exists(Path.Combine(activeNode.GethPath,"geth.exe")))
+                throw new Exception("Geth does not exist. Geth MUST exist within "+activeNode.GethPath+" directory.");
 
             if (string.IsNullOrEmpty(txtGenesisFilePath.Text) && Directory.GetFiles(txtDataFolder.Text).Length == 0)
             {
@@ -463,50 +528,24 @@ namespace Node_Runner
             }
 
             activeNode.GenesisFilePath = txtGenesisFilePath.Text;
-        }
-        private void saveActiveNodeData()
-        {
-            if (nodeList!=null && !nodeList.Any(x => x.NodeName.Equals(activeNode.NodeName, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                nodeList.Add(activeNode);
-                XmlSerializer xs = new XmlSerializer(typeof(List<Node>));
-                TextWriter tw = new StreamWriter("nodeList.xml");
-                xs.Serialize(tw, nodeList);
-                tw.Close();
-            }
-            nodeList = loadActiveNodeData();
-            refreshPreviousNodeList();
-        }
 
-        private List<Node> loadActiveNodeData()
-        {
-            if (!File.Exists("nodeList.xml"))
-                return new List<Node>();
-
-            XmlSerializer xs = new XmlSerializer(typeof(List<Node>));
-            using (var sr = new StreamReader("nodeList.xml"))
-            {
-                return (List<Node>)xs.Deserialize(sr);
-            }
+            return activeNode;
         }
-        private void btnStartRPC_Click(object sender, EventArgs e)
+         
+        private void stopActivity(NodeActivity activity)
         {
-
+            gethHelper.StopGeth(activity.ConnectedProcess);
+            activity.IsRunning = false;
+            btnStartStop.Text = "START";
+            btnMine.Text = "START MINING";
+            gethHelper.ActiveNodeList.Remove(activity);
+            toggleGethFunctionalityButtons(false, false);
+            activity.WorkerThread.CancelAsync();
         }
 
-        private void lstPrevNodes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(lstPrevNodes.SelectedItems!=null)
-            {
-                activeNode = (Node)lstPrevNodes.SelectedItems[0].Tag;
-                txtDataFolder.Text = activeNode.DataDirPath;
-                txtGenesisFilePath.Text = activeNode.GenesisFilePath;
-                txtNetworkID.Text = activeNode.NetworkID.ToString();
-                txtNodeID.Text = activeNode.NodeName;
-                txtPort.Text = activeNode.Port.ToString();
-                txtRPCPort.Text = activeNode.RpcPort.ToString();
-            }
-        } 
+
+
+
        
     }
 }

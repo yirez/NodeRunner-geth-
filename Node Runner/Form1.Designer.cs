@@ -44,14 +44,12 @@
             this.txtRPCPort = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
-            this.txtLogs = new System.Windows.Forms.TextBox();
             this.btnStartStop = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.chkPrimary = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstStaticNodes = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.backgroundWorkerProcessHandler = new System.ComponentModel.BackgroundWorker();
             this.txtCommands = new System.Windows.Forms.TextBox();
             this.btnPeerCount = new System.Windows.Forms.Button();
             this.btnNodeInfo = new System.Windows.Forms.Button();
@@ -71,6 +69,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.lstPrevNodes = new System.Windows.Forms.ListView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.customTabControl1 = new System.Windows.Forms.CustomTabControl();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcVerbosity)).BeginInit();
@@ -160,6 +159,7 @@
             this.txtNodeID.Size = new System.Drawing.Size(141, 20);
             this.txtNodeID.TabIndex = 10;
             this.txtNodeID.Text = "CustomChainPOCNode1";
+            this.txtNodeID.TextChanged += new System.EventHandler(this.txtNodeID_TextChanged);
             // 
             // label4
             // 
@@ -224,29 +224,12 @@
             this.txtPort.TabIndex = 18;
             this.txtPort.Text = "30302";
             // 
-            // txtLogs
-            // 
-            this.txtLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLogs.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtLogs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtLogs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtLogs.Location = new System.Drawing.Point(342, 30);
-            this.txtLogs.Multiline = true;
-            this.txtLogs.Name = "txtLogs";
-            this.txtLogs.ReadOnly = true;
-            this.txtLogs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLogs.Size = new System.Drawing.Size(658, 542);
-            this.txtLogs.TabIndex = 20;
-            this.txtLogs.WordWrap = false;
-            // 
             // btnStartStop
             // 
             this.btnStartStop.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnStartStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnStartStop.ForeColor = System.Drawing.SystemColors.Info;
             this.btnStartStop.Location = new System.Drawing.Point(12, 390);
             this.btnStartStop.Name = "btnStartStop";
             this.btnStartStop.Size = new System.Drawing.Size(150, 77);
@@ -326,11 +309,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "General Info";
             // 
-            // backgroundWorkerProcessHandler
-            // 
-            this.backgroundWorkerProcessHandler.WorkerSupportsCancellation = true;
-            this.backgroundWorkerProcessHandler.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProcessHandler_DoWork);
-            // 
             // txtCommands
             // 
             this.txtCommands.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -346,6 +324,7 @@
             // 
             this.btnPeerCount.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnPeerCount.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPeerCount.ForeColor = System.Drawing.SystemColors.Info;
             this.btnPeerCount.Location = new System.Drawing.Point(925, 3);
             this.btnPeerCount.Name = "btnPeerCount";
             this.btnPeerCount.Size = new System.Drawing.Size(75, 23);
@@ -358,6 +337,7 @@
             // 
             this.btnNodeInfo.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnNodeInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnNodeInfo.ForeColor = System.Drawing.SystemColors.Info;
             this.btnNodeInfo.Location = new System.Drawing.Point(595, 3);
             this.btnNodeInfo.Name = "btnNodeInfo";
             this.btnNodeInfo.Size = new System.Drawing.Size(75, 23);
@@ -370,6 +350,7 @@
             // 
             this.btnConnectedPeers.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnConnectedPeers.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnConnectedPeers.ForeColor = System.Drawing.SystemColors.Info;
             this.btnConnectedPeers.Location = new System.Drawing.Point(816, 3);
             this.btnConnectedPeers.Name = "btnConnectedPeers";
             this.btnConnectedPeers.Size = new System.Drawing.Size(103, 23);
@@ -418,6 +399,7 @@
             this.btnMine.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnMine.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnMine.ForeColor = System.Drawing.SystemColors.Info;
             this.btnMine.Location = new System.Drawing.Point(186, 390);
             this.btnMine.Name = "btnMine";
             this.btnMine.Size = new System.Drawing.Size(150, 77);
@@ -560,6 +542,7 @@
             this.lstPrevNodes.UseCompatibleStateImageBehavior = false;
             this.lstPrevNodes.View = System.Windows.Forms.View.List;
             this.lstPrevNodes.SelectedIndexChanged += new System.EventHandler(this.lstPrevNodes_SelectedIndexChanged);
+            this.lstPrevNodes.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstPrevNodes_MouseUp);
             // 
             // groupBox4
             // 
@@ -572,12 +555,45 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Previous Nodes";
             // 
+            // customTabControl1
+            // 
+            this.customTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.customTabControl1.DisplayStyle = System.Windows.Forms.TabStyle.Rounded;
+            // 
+            // 
+            // 
+            this.customTabControl1.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.customTabControl1.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.ControlDark;
+            this.customTabControl1.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
+            this.customTabControl1.DisplayStyleProvider.CloserColor = System.Drawing.Color.DarkGray;
+            this.customTabControl1.DisplayStyleProvider.FocusTrack = false;
+            this.customTabControl1.DisplayStyleProvider.HotTrack = true;
+            this.customTabControl1.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.customTabControl1.DisplayStyleProvider.Opacity = 1F;
+            this.customTabControl1.DisplayStyleProvider.Overlap = 0;
+            this.customTabControl1.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
+            this.customTabControl1.DisplayStyleProvider.Radius = 10;
+            this.customTabControl1.DisplayStyleProvider.ShowTabCloser = true;
+            this.customTabControl1.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.Info;
+            this.customTabControl1.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.Highlight;
+            this.customTabControl1.HotTrack = true;
+            this.customTabControl1.Location = new System.Drawing.Point(342, 30);
+            this.customTabControl1.Multiline = true;
+            this.customTabControl1.Name = "customTabControl1";
+            this.customTabControl1.SelectedIndex = 0;
+            this.customTabControl1.Size = new System.Drawing.Size(658, 559);
+            this.customTabControl1.TabIndex = 41;
+            this.customTabControl1.SelectedIndexChanged += new System.EventHandler(this.customTabControl1_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1009, 585);
+            this.ClientSize = new System.Drawing.Size(1009, 596);
+            this.Controls.Add(this.customTabControl1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnMine);
@@ -590,7 +606,6 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnStartStop);
-            this.Controls.Add(this.txtLogs);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -624,13 +639,11 @@
         private System.Windows.Forms.TextBox txtRPCPort;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtPort;
-        private System.Windows.Forms.TextBox txtLogs;
         private System.Windows.Forms.Button btnStartStop;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chkPrimary;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerProcessHandler;
         private System.Windows.Forms.TextBox txtCommands;
         private System.Windows.Forms.Button btnPeerCount;
         private System.Windows.Forms.Button btnNodeInfo;
@@ -651,6 +664,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListView lstPrevNodes;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CustomTabControl customTabControl1;
     }
 }
 
