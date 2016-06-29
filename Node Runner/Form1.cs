@@ -441,6 +441,7 @@ namespace Node_Runner
                 Invoke(new Action(() => btnPeerCount.Enabled = status));
                 Invoke(new Action(() => nmrcVerbosity.Enabled = status));
                 Invoke(new Action(() => txtCommands.Enabled = status));
+                Invoke(new Action(() => btnStartRPC.Enabled = status));
             }
             else
             {
@@ -449,6 +450,7 @@ namespace Node_Runner
                 btnPeerCount.Enabled = status;
                 nmrcVerbosity.Enabled = status;
                 txtCommands.Enabled = status;
+                btnStartRPC.Enabled = status;
             }
         }
 
