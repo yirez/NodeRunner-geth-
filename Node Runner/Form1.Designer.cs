@@ -70,6 +70,7 @@
             this.lstPrevNodes = new System.Windows.Forms.ListView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.customTabControl1 = new System.Windows.Forms.CustomTabControl();
+            this.btnAccountList = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcVerbosity)).BeginInit();
@@ -325,7 +326,7 @@
             this.btnPeerCount.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnPeerCount.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPeerCount.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnPeerCount.Location = new System.Drawing.Point(925, 3);
+            this.btnPeerCount.Location = new System.Drawing.Point(949, 3);
             this.btnPeerCount.Name = "btnPeerCount";
             this.btnPeerCount.Size = new System.Drawing.Size(75, 23);
             this.btnPeerCount.TabIndex = 35;
@@ -340,7 +341,7 @@
             this.btnNodeInfo.ForeColor = System.Drawing.SystemColors.Info;
             this.btnNodeInfo.Location = new System.Drawing.Point(595, 3);
             this.btnNodeInfo.Name = "btnNodeInfo";
-            this.btnNodeInfo.Size = new System.Drawing.Size(75, 23);
+            this.btnNodeInfo.Size = new System.Drawing.Size(63, 23);
             this.btnNodeInfo.TabIndex = 36;
             this.btnNodeInfo.Text = "Node Info";
             this.btnNodeInfo.UseVisualStyleBackColor = false;
@@ -351,9 +352,9 @@
             this.btnConnectedPeers.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnConnectedPeers.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnConnectedPeers.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnConnectedPeers.Location = new System.Drawing.Point(816, 3);
+            this.btnConnectedPeers.Location = new System.Drawing.Point(846, 3);
             this.btnConnectedPeers.Name = "btnConnectedPeers";
-            this.btnConnectedPeers.Size = new System.Drawing.Size(103, 23);
+            this.btnConnectedPeers.Size = new System.Drawing.Size(97, 23);
             this.btnConnectedPeers.TabIndex = 37;
             this.btnConnectedPeers.Text = "Connected Peers";
             this.btnConnectedPeers.UseVisualStyleBackColor = false;
@@ -363,7 +364,7 @@
             // 
             this.nmrcVerbosity.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.nmrcVerbosity.ForeColor = System.Drawing.SystemColors.Info;
-            this.nmrcVerbosity.Location = new System.Drawing.Point(732, 4);
+            this.nmrcVerbosity.Location = new System.Drawing.Point(720, 5);
             this.nmrcVerbosity.Maximum = new decimal(new int[] {
             6,
             0,
@@ -388,7 +389,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.Info;
-            this.label7.Location = new System.Drawing.Point(676, 7);
+            this.label7.Location = new System.Drawing.Point(664, 8);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 13);
             this.label7.TabIndex = 39;
@@ -583,16 +584,30 @@
             this.customTabControl1.Multiline = true;
             this.customTabControl1.Name = "customTabControl1";
             this.customTabControl1.SelectedIndex = 0;
-            this.customTabControl1.Size = new System.Drawing.Size(658, 559);
+            this.customTabControl1.Size = new System.Drawing.Size(691, 559);
             this.customTabControl1.TabIndex = 41;
             this.customTabControl1.SelectedIndexChanged += new System.EventHandler(this.customTabControl1_SelectedIndexChanged);
+            // 
+            // btnAccountList
+            // 
+            this.btnAccountList.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAccountList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAccountList.ForeColor = System.Drawing.SystemColors.Info;
+            this.btnAccountList.Location = new System.Drawing.Point(765, 3);
+            this.btnAccountList.Name = "btnAccountList";
+            this.btnAccountList.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountList.TabIndex = 42;
+            this.btnAccountList.Text = "Accounts";
+            this.btnAccountList.UseVisualStyleBackColor = false;
+            this.btnAccountList.Click += new System.EventHandler(this.btnAccountList_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1009, 596);
+            this.ClientSize = new System.Drawing.Size(1042, 596);
+            this.Controls.Add(this.btnAccountList);
             this.Controls.Add(this.customTabControl1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
@@ -665,6 +680,7 @@
         private System.Windows.Forms.ListView lstPrevNodes;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CustomTabControl customTabControl1;
+        private System.Windows.Forms.Button btnAccountList;
     }
 }
 

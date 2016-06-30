@@ -194,6 +194,11 @@ namespace Node_Runner
         private void nmrcVerbosity_ValueChanged(object sender, EventArgs e)
         {
             gethHelper.SendCommandToConsole("debug.verbosity(" + nmrcVerbosity.Value + ")", gethHelper.SelectedActivity.ConnectedProcess);
+        } 
+
+        private void btnAccountList_Click(object sender, EventArgs e)
+        {
+            gethHelper.SendCommandToConsole("personal.listAccounts", gethHelper.SelectedActivity.ConnectedProcess);
         }
 
         private void btnPeerCount_Click(object sender, EventArgs e)
@@ -464,6 +469,7 @@ namespace Node_Runner
                 Invoke(new Action(() => nmrcVerbosity.Enabled = status));
                 Invoke(new Action(() => txtCommands.Enabled = status));
                 Invoke(new Action(() => btnStartRPC.Enabled = status));
+                Invoke(new Action(() => btnAccountList.Enabled = status));
             }
             else
             {
@@ -473,6 +479,7 @@ namespace Node_Runner
                 nmrcVerbosity.Enabled = status;
                 txtCommands.Enabled = status;
                 btnStartRPC.Enabled = status;
+                btnAccountList.Enabled = status;
             }
         }
 
@@ -567,11 +574,7 @@ namespace Node_Runner
             gethHelper.ActiveNodeList.Remove(activity);
             toggleGethFunctionalityButtons(false, false);
             activity.WorkerThread.CancelAsync();
-        }
-
-
-
-
+        } 
        
     }
 }
