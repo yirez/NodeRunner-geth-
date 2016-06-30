@@ -71,6 +71,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.customTabControl1 = new System.Windows.Forms.CustomTabControl();
             this.btnAccountList = new System.Windows.Forms.Button();
+            this.btnGethMine = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcVerbosity)).BeginInit();
@@ -403,7 +404,7 @@
             this.btnMine.ForeColor = System.Drawing.SystemColors.Info;
             this.btnMine.Location = new System.Drawing.Point(186, 390);
             this.btnMine.Name = "btnMine";
-            this.btnMine.Size = new System.Drawing.Size(150, 77);
+            this.btnMine.Size = new System.Drawing.Size(150, 48);
             this.btnMine.TabIndex = 40;
             this.btnMine.Text = "START MINING";
             this.btnMine.UseVisualStyleBackColor = false;
@@ -601,12 +602,27 @@
             this.btnAccountList.UseVisualStyleBackColor = false;
             this.btnAccountList.Click += new System.EventHandler(this.btnAccountList_Click);
             // 
+            // btnGethMine
+            // 
+            this.btnGethMine.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnGethMine.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGethMine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnGethMine.ForeColor = System.Drawing.SystemColors.Info;
+            this.btnGethMine.Location = new System.Drawing.Point(186, 444);
+            this.btnGethMine.Name = "btnGethMine";
+            this.btnGethMine.Size = new System.Drawing.Size(150, 23);
+            this.btnGethMine.TabIndex = 43;
+            this.btnGethMine.Text = "GETH MINE";
+            this.btnGethMine.UseVisualStyleBackColor = false;
+            this.btnGethMine.Click += new System.EventHandler(this.btnGethMine_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1042, 596);
+            this.Controls.Add(this.btnGethMine);
             this.Controls.Add(this.btnAccountList);
             this.Controls.Add(this.customTabControl1);
             this.Controls.Add(this.groupBox4);
@@ -681,6 +697,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CustomTabControl customTabControl1;
         private System.Windows.Forms.Button btnAccountList;
+        private System.Windows.Forms.Button btnGethMine;
     }
 }
 

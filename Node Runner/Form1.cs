@@ -89,8 +89,13 @@ namespace Node_Runner
                     btnStartStop.Text = "STOP";
                     if (gethHelper.SelectedActivity.IsMining)
                     {
-                        btnMine.Text = "STOP MINING"; 
+                        btnMine.Text = "STOP MINING";
                         btnStartStop.Enabled = false;
+                    }
+                    else
+                    {
+                        btnMine.Text = "START MINING";
+                        btnMine.Enabled = false;
                     }
                     toggleGethFunctionalityButtons(true, false);
                 }
@@ -191,6 +196,27 @@ namespace Node_Runner
                 toggleGethFunctionalityButtons(true, false);
             }
         }
+
+        private void btnGethMine_Click(object sender, EventArgs e)
+        {
+            btnMine.Enabled = false;
+            if(gethHelper.SelectedActivity!=null)
+            {
+                if (!gethHelper.SelectedActivity.IsMining)
+                {
+                    btnGethMine.Text = "STOP GETH MINING";
+                    gethHelper.SelectedActivity.IsMining = true;
+                    gethHelper.SendCommandToConsole("miner.start(8)", gethHelper.SelectedActivity.ConnectedProcess);
+                }
+                else
+                { 
+                    btnGethMine.Text = "START GETH MINING";
+                    gethHelper.SelectedActivity.IsMining = false;
+                    gethHelper.SendCommandToConsole("miner.stop()", gethHelper.SelectedActivity.ConnectedProcess);
+                }
+            }
+            
+        } 
         private void nmrcVerbosity_ValueChanged(object sender, EventArgs e)
         {
             gethHelper.SendCommandToConsole("debug.verbosity(" + nmrcVerbosity.Value + ")", gethHelper.SelectedActivity.ConnectedProcess);
@@ -244,6 +270,7 @@ namespace Node_Runner
                     activity.WorkerThread = bw;
                     gethHelper.ActiveNodeList.Add(activity);
                     toggleGethFunctionalityButtons(true,false);
+                    btnGethMine.Enabled = false;
                     gethHelper.SaveActiveNodeData(activity.ActiveNode);
                     gethHelper.SelectedActivity = activity;
                     handleTabSelectionChanges();
@@ -271,7 +298,7 @@ namespace Node_Runner
             }
             catch (Exception ex)
             {
-                btnStartStop.Enabled = true;
+                btnStartStop.Enabled = true; 
                 activity.IsRunning = false;
                 btnMine.Text = "START MINING";
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); 
@@ -470,6 +497,7 @@ namespace Node_Runner
                 Invoke(new Action(() => txtCommands.Enabled = status));
                 Invoke(new Action(() => btnStartRPC.Enabled = status));
                 Invoke(new Action(() => btnAccountList.Enabled = status));
+                Invoke(new Action(() => btnGethMine.Enabled = status));
             }
             else
             {
@@ -480,6 +508,7 @@ namespace Node_Runner
                 txtCommands.Enabled = status;
                 btnStartRPC.Enabled = status;
                 btnAccountList.Enabled = status;
+                btnGethMine.Enabled = status;
             }
         }
 
@@ -574,7 +603,7 @@ namespace Node_Runner
             gethHelper.ActiveNodeList.Remove(activity);
             toggleGethFunctionalityButtons(false, false);
             activity.WorkerThread.CancelAsync();
-        } 
+        }
        
     }
 }
