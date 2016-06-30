@@ -57,11 +57,15 @@ namespace Node_Runner
                 txtNodeID.Text = node.NodeName;
                 txtPort.Text = node.Port.ToString();
                 txtRPCPort.Text = node.RpcPort.ToString();
+                chkPrimary.Checked = node.IsPrimary;
             }
         }
         private void handleTabSelectionChanges()
         {
             gethHelper.SelectedActivity = getSelectedTabActivity();
+            btnMine.Enabled = true;
+            btnStartStop.Enabled = true;
+
             if (gethHelper.SelectedActivity != null)
             {
                 txtDataFolder.Text = gethHelper.SelectedActivity.ActiveNode.DataDirPath;
@@ -70,6 +74,8 @@ namespace Node_Runner
                 txtNodeID.Text = gethHelper.SelectedActivity.ActiveNode.NodeName;
                 txtPort.Text = gethHelper.SelectedActivity.ActiveNode.Port.ToString();
                 txtRPCPort.Text = gethHelper.SelectedActivity.ActiveNode.RpcPort.ToString();
+                chkPrimary.Checked = gethHelper.SelectedActivity.ActiveNode.IsPrimary;
+
 
                 if (!gethHelper.SelectedActivity.IsRunning)
                 {
@@ -81,7 +87,10 @@ namespace Node_Runner
                 {
                     btnStartStop.Text = "STOP";
                     if (gethHelper.SelectedActivity.IsMining)
-                        btnMine.Text = "STOP MINING";
+                    {
+                        btnMine.Text = "STOP MINING"; 
+                        btnStartStop.Enabled = false;
+                    }
                     toggleGethFunctionalityButtons(true, false);
                 }
             }
@@ -93,6 +102,7 @@ namespace Node_Runner
                 txtNodeID.Text = string.Empty;
                 txtPort.Text = string.Empty;
                 txtRPCPort.Text = string.Empty;
+                chkPrimary.Checked= false;
             }
 
             // find if any tab is closed, start close operations if so.
@@ -125,13 +135,28 @@ namespace Node_Runner
                     ContextMenu myContextMenu = new ContextMenu();
                      
                     MenuItem menuItem1 = new MenuItem("Delete"); 
+                    MenuItem menuItem2 = new MenuItem("Open Data Directory");  
 
 
                     // Clear all previously added MenuItems.
                     myContextMenu.MenuItems.Clear(); 
                     myContextMenu.MenuItems.Add(menuItem1); 
+                    myContextMenu.MenuItems.Add(menuItem2); 
                     myContextMenu.Show(lstPrevNodes, e.Location, LeftRightAlignment.Right); 
-                    menuItem1.Click += new System.EventHandler(deleteSelectedPreviousNode); 
+                     
+                    menuItem1.Click += delegate
+                    {
+                        if (lstPrevNodes.SelectedItems != null && lstPrevNodes.SelectedItems.Count > 0)
+                        {
+                            lstPrevNodes.Items.Remove(lstPrevNodes.SelectedItems[0]);
+                        }
+                    };
+
+                    menuItem2.Click += delegate
+                    {
+                        if (lstPrevNodes.SelectedItems != null && lstPrevNodes.SelectedItems.Count>0)
+                            genericHelper.OpenDirectory(((Node)lstPrevNodes.SelectedItems[0].Tag).DataDirPath);
+                    };
                     break;
 
             }
@@ -187,6 +212,9 @@ namespace Node_Runner
 
         private void btnMine_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtNetworkID.Text) || string.IsNullOrEmpty(txtNodeID.Text))
+                return;
+
             NodeActivity activity = new NodeActivity();
             try
             {
@@ -370,15 +398,8 @@ namespace Node_Runner
             }
 
             return null;
-        }
+        } 
 
-        private void deleteSelectedPreviousNode(object sender, EventArgs e)
-        {
-            if (lstPrevNodes.SelectedItems != null && lstPrevNodes.SelectedItems.Count > 0)
-            {
-                lstPrevNodes.Items.Remove(lstPrevNodes.SelectedItems[0]);
-            }
-        }
         private void refreshStaticNodeList()
         {
             lstStaticNodes.Items.Clear();
@@ -539,6 +560,8 @@ namespace Node_Runner
             gethHelper.StopGeth(activity.ConnectedProcess);
             activity.IsRunning = false;
             btnStartStop.Text = "START";
+            btnStartStop.Enabled = true;
+            btnMine.Enabled = true;
             btnMine.Text = "START MINING";
             gethHelper.ActiveNodeList.Remove(activity);
             toggleGethFunctionalityButtons(false, false);

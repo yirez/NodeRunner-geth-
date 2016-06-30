@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -20,6 +21,11 @@ namespace Node_Runner.Helpers
                 }
             }
             return "Local IP Address Not Found!";
+        }
+
+        public void OpenDirectory(string path)
+        {
+            Process.Start(path);
         }
     }
 }
