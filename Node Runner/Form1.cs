@@ -75,7 +75,8 @@ namespace Node_Runner
                 txtPort.Text = gethHelper.SelectedActivity.ActiveNode.Port.ToString();
                 txtRPCPort.Text = gethHelper.SelectedActivity.ActiveNode.RpcPort.ToString();
                 chkPrimary.Checked = gethHelper.SelectedActivity.ActiveNode.IsPrimary;
-
+                
+                refreshStaticNodeList();
 
                 if (!gethHelper.SelectedActivity.IsRunning)
                 {
