@@ -29,34 +29,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.txtGenesisFilePath = new System.Windows.Forms.TextBox();
             this.findGenedisFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.btnFindGenesis = new System.Windows.Forms.Button();
-            this.btnFindDataDir = new System.Windows.Forms.Button();
-            this.txtDataFolder = new System.Windows.Forms.TextBox();
             this.dataDirBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtNodeID = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtNetworkID = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtRPCPort = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtPort = new System.Windows.Forms.TextBox();
             this.btnStartStop = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.chkPrimary = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstStaticNodes = new System.Windows.Forms.ListView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtCommands = new System.Windows.Forms.TextBox();
             this.btnPeerCount = new System.Windows.Forms.Button();
             this.btnNodeInfo = new System.Windows.Forms.Button();
             this.btnConnectedPeers = new System.Windows.Forms.Button();
             this.nmrcVerbosity = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnMine = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnStartRPC = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -71,203 +54,53 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.customTabControl1 = new System.Windows.Forms.CustomTabControl();
             this.btnAccountList = new System.Windows.Forms.Button();
-            this.btnGethMine = new System.Windows.Forms.Button();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtRPCPort = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtNetworkID = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.chkPrimary = new System.Windows.Forms.CheckBox();
+            this.txtNodeID = new System.Windows.Forms.TextBox();
+            this.btnFindNodeDir = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtNodeFolder = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcVerbosity)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtGenesisFilePath
-            // 
-            this.txtGenesisFilePath.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.txtGenesisFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtGenesisFilePath.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtGenesisFilePath.Location = new System.Drawing.Point(79, 68);
-            this.txtGenesisFilePath.Multiline = true;
-            this.txtGenesisFilePath.Name = "txtGenesisFilePath";
-            this.txtGenesisFilePath.Size = new System.Drawing.Size(153, 47);
-            this.txtGenesisFilePath.TabIndex = 1;
             // 
             // findGenedisFileDialog
             // 
             this.findGenedisFileDialog.FileName = "CustomGenesis.json";
             // 
-            // btnFindGenesis
-            // 
-            this.btnFindGenesis.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnFindGenesis.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFindGenesis.Location = new System.Drawing.Point(238, 68);
-            this.btnFindGenesis.Name = "btnFindGenesis";
-            this.btnFindGenesis.Size = new System.Drawing.Size(80, 20);
-            this.btnFindGenesis.TabIndex = 2;
-            this.btnFindGenesis.Text = "Browse";
-            this.btnFindGenesis.UseVisualStyleBackColor = false;
-            this.btnFindGenesis.Click += new System.EventHandler(this.btnFindGenesis_Click);
-            // 
-            // btnFindDataDir
-            // 
-            this.btnFindDataDir.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnFindDataDir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFindDataDir.Location = new System.Drawing.Point(238, 152);
-            this.btnFindDataDir.Name = "btnFindDataDir";
-            this.btnFindDataDir.Size = new System.Drawing.Size(75, 20);
-            this.btnFindDataDir.TabIndex = 2;
-            this.btnFindDataDir.Text = "Browse";
-            this.btnFindDataDir.UseVisualStyleBackColor = false;
-            this.btnFindDataDir.Click += new System.EventHandler(this.btnFindDataDir_Click);
-            // 
-            // txtDataFolder
-            // 
-            this.txtDataFolder.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.txtDataFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDataFolder.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtDataFolder.Location = new System.Drawing.Point(79, 125);
-            this.txtDataFolder.Multiline = true;
-            this.txtDataFolder.Name = "txtDataFolder";
-            this.txtDataFolder.Size = new System.Drawing.Size(153, 47);
-            this.txtDataFolder.TabIndex = 1;
-            this.txtDataFolder.Text = "D:\\blockchain_critical\\Ethereum\\customchain1\\node1\\chain";
-            this.txtDataFolder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDataFolder_KeyDown);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.Info;
-            this.label1.Location = new System.Drawing.Point(9, 125);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Data Dir:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.Info;
-            this.label2.Location = new System.Drawing.Point(6, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Node Name:";
-            // 
-            // txtNodeID
-            // 
-            this.txtNodeID.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.txtNodeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNodeID.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtNodeID.Location = new System.Drawing.Point(79, 42);
-            this.txtNodeID.Name = "txtNodeID";
-            this.txtNodeID.Size = new System.Drawing.Size(141, 20);
-            this.txtNodeID.TabIndex = 10;
-            this.txtNodeID.Text = "CustomChainPOCNode1";
-            this.txtNodeID.TextChanged += new System.EventHandler(this.txtNodeID_TextChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.SystemColors.Info;
-            this.label4.Location = new System.Drawing.Point(9, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Network ID:";
-            // 
-            // txtNetworkID
-            // 
-            this.txtNetworkID.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.txtNetworkID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNetworkID.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtNetworkID.Location = new System.Drawing.Point(79, 16);
-            this.txtNetworkID.Name = "txtNetworkID";
-            this.txtNetworkID.Size = new System.Drawing.Size(141, 20);
-            this.txtNetworkID.TabIndex = 14;
-            this.txtNetworkID.Text = "2147483645";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.SystemColors.Info;
-            this.label5.Location = new System.Drawing.Point(226, 43);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "RPC Port:";
-            // 
-            // txtRPCPort
-            // 
-            this.txtRPCPort.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.txtRPCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRPCPort.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtRPCPort.Location = new System.Drawing.Point(286, 41);
-            this.txtRPCPort.Name = "txtRPCPort";
-            this.txtRPCPort.Size = new System.Drawing.Size(32, 20);
-            this.txtRPCPort.TabIndex = 16;
-            this.txtRPCPort.Text = "8102";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.SystemColors.Info;
-            this.label6.Location = new System.Drawing.Point(226, 19);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 13);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Port:";
-            // 
-            // txtPort
-            // 
-            this.txtPort.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPort.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtPort.Location = new System.Drawing.Point(270, 16);
-            this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(48, 20);
-            this.txtPort.TabIndex = 18;
-            this.txtPort.Text = "30302";
-            // 
             // btnStartStop
             // 
+            this.btnStartStop.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnStartStop.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnStartStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStartStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnStartStop.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnStartStop.Location = new System.Drawing.Point(12, 390);
+            this.btnStartStop.Location = new System.Drawing.Point(14, 312);
             this.btnStartStop.Name = "btnStartStop";
-            this.btnStartStop.Size = new System.Drawing.Size(150, 77);
+            this.btnStartStop.Size = new System.Drawing.Size(378, 43);
             this.btnStartStop.TabIndex = 21;
             this.btnStartStop.Text = "START";
             this.btnStartStop.UseVisualStyleBackColor = false;
             this.btnStartStop.Click += new System.EventHandler(this.btnStartStop_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.Info;
-            this.label3.Location = new System.Drawing.Point(9, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 13);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Genesis:";
-            // 
-            // chkPrimary
-            // 
-            this.chkPrimary.AutoSize = true;
-            this.chkPrimary.ForeColor = System.Drawing.SystemColors.Info;
-            this.chkPrimary.Location = new System.Drawing.Point(238, 108);
-            this.chkPrimary.Name = "chkPrimary";
-            this.chkPrimary.Size = new System.Drawing.Size(75, 30);
-            this.chkPrimary.TabIndex = 23;
-            this.chkPrimary.Text = "PRIMARY\r\nNODE";
-            this.chkPrimary.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.groupBox2.Controls.Add(this.lstStaticNodes);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBox2.Location = new System.Drawing.Point(12, 280);
+            this.groupBox2.Location = new System.Drawing.Point(14, 361);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(324, 104);
+            this.groupBox2.Size = new System.Drawing.Size(378, 143);
             this.groupBox2.TabIndex = 32;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Static Nodes";
@@ -278,47 +111,25 @@
             this.lstStaticNodes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lstStaticNodes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstStaticNodes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.lstStaticNodes.Location = new System.Drawing.Point(3, 16);
+            this.lstStaticNodes.Location = new System.Drawing.Point(3, 17);
             this.lstStaticNodes.Name = "lstStaticNodes";
-            this.lstStaticNodes.Size = new System.Drawing.Size(318, 85);
+            this.lstStaticNodes.Size = new System.Drawing.Size(372, 123);
             this.lstStaticNodes.TabIndex = 0;
             this.lstStaticNodes.UseCompatibleStateImageBehavior = false;
             this.lstStaticNodes.View = System.Windows.Forms.View.List;
             this.lstStaticNodes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstStaticNodes_KeyUp);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btnFindGenesis);
-            this.groupBox3.Controls.Add(this.txtDataFolder);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.txtGenesisFilePath);
-            this.groupBox3.Controls.Add(this.btnFindDataDir);
-            this.groupBox3.Controls.Add(this.txtNodeID);
-            this.groupBox3.Controls.Add(this.chkPrimary);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.txtNetworkID);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.txtRPCPort);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.txtPort);
-            this.groupBox3.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBox3.Location = new System.Drawing.Point(12, 11);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(324, 179);
-            this.groupBox3.TabIndex = 33;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "General Info";
-            // 
             // txtCommands
             // 
-            this.txtCommands.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtCommands.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCommands.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtCommands.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCommands.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtCommands.Location = new System.Drawing.Point(342, 4);
+            this.txtCommands.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtCommands.ForeColor = System.Drawing.Color.Maroon;
+            this.txtCommands.Location = new System.Drawing.Point(399, 50);
             this.txtCommands.Name = "txtCommands";
-            this.txtCommands.Size = new System.Drawing.Size(247, 20);
+            this.txtCommands.Size = new System.Drawing.Size(806, 23);
             this.txtCommands.TabIndex = 34;
             this.txtCommands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCommands_KeyDown);
             // 
@@ -326,10 +137,11 @@
             // 
             this.btnPeerCount.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnPeerCount.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPeerCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.btnPeerCount.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnPeerCount.Location = new System.Drawing.Point(949, 3);
+            this.btnPeerCount.Location = new System.Drawing.Point(815, 16);
             this.btnPeerCount.Name = "btnPeerCount";
-            this.btnPeerCount.Size = new System.Drawing.Size(75, 23);
+            this.btnPeerCount.Size = new System.Drawing.Size(87, 27);
             this.btnPeerCount.TabIndex = 35;
             this.btnPeerCount.Text = "Peer Count";
             this.btnPeerCount.UseVisualStyleBackColor = false;
@@ -339,10 +151,11 @@
             // 
             this.btnNodeInfo.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnNodeInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnNodeInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.btnNodeInfo.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnNodeInfo.Location = new System.Drawing.Point(595, 3);
+            this.btnNodeInfo.Location = new System.Drawing.Point(399, 16);
             this.btnNodeInfo.Name = "btnNodeInfo";
-            this.btnNodeInfo.Size = new System.Drawing.Size(63, 23);
+            this.btnNodeInfo.Size = new System.Drawing.Size(73, 27);
             this.btnNodeInfo.TabIndex = 36;
             this.btnNodeInfo.Text = "Node Info";
             this.btnNodeInfo.UseVisualStyleBackColor = false;
@@ -352,10 +165,11 @@
             // 
             this.btnConnectedPeers.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnConnectedPeers.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnConnectedPeers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.btnConnectedPeers.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnConnectedPeers.Location = new System.Drawing.Point(846, 3);
+            this.btnConnectedPeers.Location = new System.Drawing.Point(695, 16);
             this.btnConnectedPeers.Name = "btnConnectedPeers";
-            this.btnConnectedPeers.Size = new System.Drawing.Size(97, 23);
+            this.btnConnectedPeers.Size = new System.Drawing.Size(113, 27);
             this.btnConnectedPeers.TabIndex = 37;
             this.btnConnectedPeers.Text = "Connected Peers";
             this.btnConnectedPeers.UseVisualStyleBackColor = false;
@@ -364,8 +178,9 @@
             // nmrcVerbosity
             // 
             this.nmrcVerbosity.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.nmrcVerbosity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.nmrcVerbosity.ForeColor = System.Drawing.SystemColors.Info;
-            this.nmrcVerbosity.Location = new System.Drawing.Point(720, 5);
+            this.nmrcVerbosity.Location = new System.Drawing.Point(548, 18);
             this.nmrcVerbosity.Maximum = new decimal(new int[] {
             6,
             0,
@@ -377,7 +192,7 @@
             0,
             0});
             this.nmrcVerbosity.Name = "nmrcVerbosity";
-            this.nmrcVerbosity.Size = new System.Drawing.Size(39, 20);
+            this.nmrcVerbosity.Size = new System.Drawing.Size(45, 21);
             this.nmrcVerbosity.TabIndex = 38;
             this.nmrcVerbosity.Value = new decimal(new int[] {
             3,
@@ -389,29 +204,17 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.label7.ForeColor = System.Drawing.SystemColors.Info;
-            this.label7.Location = new System.Drawing.Point(664, 8);
+            this.label7.Location = new System.Drawing.Point(483, 22);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 13);
+            this.label7.Size = new System.Drawing.Size(65, 16);
             this.label7.TabIndex = 39;
             this.label7.Text = "Verbosity";
             // 
-            // btnMine
-            // 
-            this.btnMine.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnMine.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnMine.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnMine.Location = new System.Drawing.Point(186, 390);
-            this.btnMine.Name = "btnMine";
-            this.btnMine.Size = new System.Drawing.Size(150, 48);
-            this.btnMine.TabIndex = 40;
-            this.btnMine.Text = "START MINING";
-            this.btnMine.UseVisualStyleBackColor = false;
-            this.btnMine.Click += new System.EventHandler(this.btnMine_Click);
-            // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.btnStartRPC);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.lstRPCExposeAPIs);
@@ -422,9 +225,9 @@
             this.groupBox1.Controls.Add(this.txtRPCExposeHost);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBox1.Location = new System.Drawing.Point(12, 473);
+            this.groupBox1.Location = new System.Drawing.Point(14, 505);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(324, 116);
+            this.groupBox1.Size = new System.Drawing.Size(378, 175);
             this.groupBox1.TabIndex = 33;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "RPC Control";
@@ -434,9 +237,9 @@
             this.btnStartRPC.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnStartRPC.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStartRPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnStartRPC.Location = new System.Drawing.Point(124, 69);
+            this.btnStartRPC.Location = new System.Drawing.Point(145, 80);
             this.btnStartRPC.Name = "btnStartRPC";
-            this.btnStartRPC.Size = new System.Drawing.Size(189, 43);
+            this.btnStartRPC.Size = new System.Drawing.Size(220, 50);
             this.btnStartRPC.TabIndex = 41;
             this.btnStartRPC.Text = "START RPC";
             this.btnStartRPC.UseVisualStyleBackColor = false;
@@ -446,9 +249,9 @@
             // 
             this.label11.AutoSize = true;
             this.label11.ForeColor = System.Drawing.SystemColors.Info;
-            this.label11.Location = new System.Drawing.Point(6, 69);
+            this.label11.Location = new System.Drawing.Point(7, 80);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(32, 13);
+            this.label11.Size = new System.Drawing.Size(39, 16);
             this.label11.TabIndex = 31;
             this.label11.Text = "APIs:";
             // 
@@ -457,6 +260,7 @@
             this.lstRPCExposeAPIs.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.lstRPCExposeAPIs.ForeColor = System.Drawing.SystemColors.Info;
             this.lstRPCExposeAPIs.FormattingEnabled = true;
+            this.lstRPCExposeAPIs.ItemHeight = 15;
             this.lstRPCExposeAPIs.Items.AddRange(new object[] {
             "eth",
             "web3",
@@ -464,10 +268,10 @@
             "shh",
             "bzz",
             "les"});
-            this.lstRPCExposeAPIs.Location = new System.Drawing.Point(44, 69);
+            this.lstRPCExposeAPIs.Location = new System.Drawing.Point(51, 80);
             this.lstRPCExposeAPIs.Name = "lstRPCExposeAPIs";
             this.lstRPCExposeAPIs.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstRPCExposeAPIs.Size = new System.Drawing.Size(74, 43);
+            this.lstRPCExposeAPIs.Size = new System.Drawing.Size(86, 49);
             this.lstRPCExposeAPIs.TabIndex = 30;
             // 
             // txtRPCExposeCors
@@ -475,9 +279,9 @@
             this.txtRPCExposeCors.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.txtRPCExposeCors.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRPCExposeCors.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtRPCExposeCors.Location = new System.Drawing.Point(174, 43);
+            this.txtRPCExposeCors.Location = new System.Drawing.Point(203, 50);
             this.txtRPCExposeCors.Name = "txtRPCExposeCors";
-            this.txtRPCExposeCors.Size = new System.Drawing.Size(139, 20);
+            this.txtRPCExposeCors.Size = new System.Drawing.Size(162, 21);
             this.txtRPCExposeCors.TabIndex = 28;
             this.txtRPCExposeCors.Text = "*";
             // 
@@ -485,9 +289,9 @@
             // 
             this.label10.AutoSize = true;
             this.label10.ForeColor = System.Drawing.SystemColors.Info;
-            this.label10.Location = new System.Drawing.Point(144, 45);
+            this.label10.Location = new System.Drawing.Point(168, 52);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(31, 13);
+            this.label10.Size = new System.Drawing.Size(39, 16);
             this.label10.TabIndex = 29;
             this.label10.Text = "Cors:";
             // 
@@ -496,9 +300,9 @@
             this.txtRPCExposePort.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.txtRPCExposePort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRPCExposePort.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtRPCExposePort.Location = new System.Drawing.Point(44, 43);
+            this.txtRPCExposePort.Location = new System.Drawing.Point(51, 50);
             this.txtRPCExposePort.Name = "txtRPCExposePort";
-            this.txtRPCExposePort.Size = new System.Drawing.Size(94, 20);
+            this.txtRPCExposePort.Size = new System.Drawing.Size(109, 21);
             this.txtRPCExposePort.TabIndex = 26;
             this.txtRPCExposePort.Text = "8545";
             // 
@@ -506,9 +310,9 @@
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.SystemColors.Info;
-            this.label9.Location = new System.Drawing.Point(6, 45);
+            this.label9.Location = new System.Drawing.Point(7, 52);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(29, 13);
+            this.label9.Size = new System.Drawing.Size(35, 16);
             this.label9.TabIndex = 27;
             this.label9.Text = "Port:";
             // 
@@ -517,18 +321,18 @@
             this.txtRPCExposeHost.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.txtRPCExposeHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRPCExposeHost.ForeColor = System.Drawing.SystemColors.Info;
-            this.txtRPCExposeHost.Location = new System.Drawing.Point(44, 17);
+            this.txtRPCExposeHost.Location = new System.Drawing.Point(51, 20);
             this.txtRPCExposeHost.Name = "txtRPCExposeHost";
-            this.txtRPCExposeHost.Size = new System.Drawing.Size(269, 20);
+            this.txtRPCExposeHost.Size = new System.Drawing.Size(313, 21);
             this.txtRPCExposeHost.TabIndex = 24;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.SystemColors.Info;
-            this.label8.Location = new System.Drawing.Point(6, 19);
+            this.label8.Location = new System.Drawing.Point(7, 22);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(32, 13);
+            this.label8.Size = new System.Drawing.Size(39, 16);
             this.label8.TabIndex = 25;
             this.label8.Text = "Host:";
             // 
@@ -537,9 +341,9 @@
             this.lstPrevNodes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lstPrevNodes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstPrevNodes.ForeColor = System.Drawing.SystemColors.Info;
-            this.lstPrevNodes.Location = new System.Drawing.Point(3, 16);
+            this.lstPrevNodes.Location = new System.Drawing.Point(3, 17);
             this.lstPrevNodes.Name = "lstPrevNodes";
-            this.lstPrevNodes.Size = new System.Drawing.Size(318, 59);
+            this.lstPrevNodes.Size = new System.Drawing.Size(362, 121);
             this.lstPrevNodes.TabIndex = 41;
             this.lstPrevNodes.UseCompatibleStateImageBehavior = false;
             this.lstPrevNodes.View = System.Windows.Forms.View.List;
@@ -548,11 +352,12 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.groupBox4.Controls.Add(this.lstPrevNodes);
             this.groupBox4.ForeColor = System.Drawing.SystemColors.Info;
-            this.groupBox4.Location = new System.Drawing.Point(12, 196);
+            this.groupBox4.Location = new System.Drawing.Point(3, 146);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(324, 78);
+            this.groupBox4.Size = new System.Drawing.Size(368, 141);
             this.groupBox4.TabIndex = 33;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Previous Nodes";
@@ -580,12 +385,12 @@
             this.customTabControl1.DisplayStyleProvider.ShowTabCloser = true;
             this.customTabControl1.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.Info;
             this.customTabControl1.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.Highlight;
+            this.customTabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.customTabControl1.HotTrack = true;
-            this.customTabControl1.Location = new System.Drawing.Point(342, 30);
-            this.customTabControl1.Multiline = true;
+            this.customTabControl1.Location = new System.Drawing.Point(399, 79);
             this.customTabControl1.Name = "customTabControl1";
             this.customTabControl1.SelectedIndex = 0;
-            this.customTabControl1.Size = new System.Drawing.Size(691, 559);
+            this.customTabControl1.Size = new System.Drawing.Size(806, 601);
             this.customTabControl1.TabIndex = 41;
             this.customTabControl1.SelectedIndexChanged += new System.EventHandler(this.customTabControl1_SelectedIndexChanged);
             // 
@@ -593,41 +398,179 @@
             // 
             this.btnAccountList.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnAccountList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAccountList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.btnAccountList.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnAccountList.Location = new System.Drawing.Point(765, 3);
+            this.btnAccountList.Location = new System.Drawing.Point(601, 16);
             this.btnAccountList.Name = "btnAccountList";
-            this.btnAccountList.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountList.Size = new System.Drawing.Size(87, 27);
             this.btnAccountList.TabIndex = 42;
             this.btnAccountList.Text = "Accounts";
             this.btnAccountList.UseVisualStyleBackColor = false;
             this.btnAccountList.Click += new System.EventHandler(this.btnAccountList_Click);
             // 
-            // btnGethMine
+            // txtPort
             // 
-            this.btnGethMine.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnGethMine.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnGethMine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnGethMine.ForeColor = System.Drawing.SystemColors.Info;
-            this.btnGethMine.Location = new System.Drawing.Point(186, 444);
-            this.btnGethMine.Name = "btnGethMine";
-            this.btnGethMine.Size = new System.Drawing.Size(150, 23);
-            this.btnGethMine.TabIndex = 43;
-            this.btnGethMine.Text = "GETH MINE";
-            this.btnGethMine.UseVisualStyleBackColor = false;
-            this.btnGethMine.Click += new System.EventHandler(this.btnGethMine_Click);
+            this.txtPort.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPort.ForeColor = System.Drawing.SystemColors.Info;
+            this.txtPort.Location = new System.Drawing.Point(315, 18);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(56, 21);
+            this.txtPort.TabIndex = 18;
+            this.txtPort.Text = "30302";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.Info;
+            this.label5.Location = new System.Drawing.Point(264, 50);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 16);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "RPC Port:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.SystemColors.Info;
+            this.label6.Location = new System.Drawing.Point(264, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 16);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Port:";
+            // 
+            // txtRPCPort
+            // 
+            this.txtRPCPort.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtRPCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRPCPort.ForeColor = System.Drawing.SystemColors.Info;
+            this.txtRPCPort.Location = new System.Drawing.Point(334, 47);
+            this.txtRPCPort.Name = "txtRPCPort";
+            this.txtRPCPort.Size = new System.Drawing.Size(37, 21);
+            this.txtRPCPort.TabIndex = 16;
+            this.txtRPCPort.Text = "8102";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.Info;
+            this.label4.Location = new System.Drawing.Point(7, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 16);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Network ID:";
+            // 
+            // txtNetworkID
+            // 
+            this.txtNetworkID.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtNetworkID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNetworkID.ForeColor = System.Drawing.SystemColors.Info;
+            this.txtNetworkID.Location = new System.Drawing.Point(92, 18);
+            this.txtNetworkID.Name = "txtNetworkID";
+            this.txtNetworkID.Size = new System.Drawing.Size(164, 21);
+            this.txtNetworkID.TabIndex = 14;
+            this.txtNetworkID.Text = "2147483645";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.Info;
+            this.label2.Location = new System.Drawing.Point(7, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 16);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Node Name:";
+            // 
+            // chkPrimary
+            // 
+            this.chkPrimary.AutoSize = true;
+            this.chkPrimary.ForeColor = System.Drawing.SystemColors.Info;
+            this.chkPrimary.Location = new System.Drawing.Point(267, 104);
+            this.chkPrimary.Name = "chkPrimary";
+            this.chkPrimary.Size = new System.Drawing.Size(88, 36);
+            this.chkPrimary.TabIndex = 23;
+            this.chkPrimary.Text = "PRIMARY\r\nNODE";
+            this.chkPrimary.UseVisualStyleBackColor = true;
+            // 
+            // txtNodeID
+            // 
+            this.txtNodeID.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtNodeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNodeID.ForeColor = System.Drawing.SystemColors.Info;
+            this.txtNodeID.Location = new System.Drawing.Point(92, 48);
+            this.txtNodeID.Name = "txtNodeID";
+            this.txtNodeID.Size = new System.Drawing.Size(164, 21);
+            this.txtNodeID.TabIndex = 10;
+            this.txtNodeID.Text = "CustomChainPOCNode1";
+            this.txtNodeID.TextChanged += new System.EventHandler(this.txtNodeID_TextChanged);
+            // 
+            // btnFindNodeDir
+            // 
+            this.btnFindNodeDir.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnFindNodeDir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFindNodeDir.Location = new System.Drawing.Point(267, 75);
+            this.btnFindNodeDir.Name = "btnFindNodeDir";
+            this.btnFindNodeDir.Size = new System.Drawing.Size(105, 23);
+            this.btnFindNodeDir.TabIndex = 2;
+            this.btnFindNodeDir.Text = "Browse";
+            this.btnFindNodeDir.UseVisualStyleBackColor = false;
+            this.btnFindNodeDir.Click += new System.EventHandler(this.btnFindDataDir_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.Info;
+            this.label1.Location = new System.Drawing.Point(7, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 16);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Node Dir:";
+            // 
+            // txtNodeFolder
+            // 
+            this.txtNodeFolder.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.txtNodeFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNodeFolder.ForeColor = System.Drawing.SystemColors.Info;
+            this.txtNodeFolder.Location = new System.Drawing.Point(92, 75);
+            this.txtNodeFolder.Multiline = true;
+            this.txtNodeFolder.Name = "txtNodeFolder";
+            this.txtNodeFolder.Size = new System.Drawing.Size(164, 54);
+            this.txtNodeFolder.TabIndex = 1;
+            this.txtNodeFolder.Text = "D:\\blockchain_critical\\Ethereum\\customchain1\\node1\\chain";
+            this.txtNodeFolder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDataFolder_KeyDown);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtNodeFolder);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.btnFindNodeDir);
+            this.groupBox3.Controls.Add(this.groupBox4);
+            this.groupBox3.Controls.Add(this.txtNodeID);
+            this.groupBox3.Controls.Add(this.chkPrimary);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.txtNetworkID);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.txtRPCPort);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.txtPort);
+            this.groupBox3.ForeColor = System.Drawing.SystemColors.Info;
+            this.groupBox3.Location = new System.Drawing.Point(14, 13);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(378, 293);
+            this.groupBox3.TabIndex = 33;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "General Info";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1042, 596);
-            this.Controls.Add(this.btnGethMine);
+            this.ClientSize = new System.Drawing.Size(1216, 688);
             this.Controls.Add(this.btnAccountList);
             this.Controls.Add(this.customTabControl1);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnMine);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.nmrcVerbosity);
             this.Controls.Add(this.btnConnectedPeers);
@@ -637,51 +580,34 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnStartStop);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Node Runner v0.0.1";
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrcVerbosity)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtGenesisFilePath;
         private System.Windows.Forms.OpenFileDialog findGenedisFileDialog;
-        private System.Windows.Forms.Button btnFindGenesis;
-        private System.Windows.Forms.Button btnFindDataDir;
-        private System.Windows.Forms.TextBox txtDataFolder;
         private System.Windows.Forms.FolderBrowserDialog dataDirBrowserDialog;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNodeID;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtNetworkID;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtRPCPort;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Button btnStartStop;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox chkPrimary;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtCommands;
         private System.Windows.Forms.Button btnPeerCount;
         private System.Windows.Forms.Button btnNodeInfo;
         private System.Windows.Forms.Button btnConnectedPeers;
         private System.Windows.Forms.NumericUpDown nmrcVerbosity;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnMine;
         private System.Windows.Forms.ListView lstStaticNodes;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnStartRPC;
@@ -697,7 +623,19 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CustomTabControl customTabControl1;
         private System.Windows.Forms.Button btnAccountList;
-        private System.Windows.Forms.Button btnGethMine;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtRPCPort;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtNetworkID;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkPrimary;
+        private System.Windows.Forms.TextBox txtNodeID;
+        private System.Windows.Forms.Button btnFindNodeDir;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtNodeFolder;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

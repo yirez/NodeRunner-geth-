@@ -39,71 +39,40 @@ namespace Node_Runner.Helpers
         {
             StringBuilder gethChainCommand = new StringBuilder();
             //nothing in chain (no chain data), must have genesis to rebuild
-            if (!Directory.Exists(Path.Combine(activeNode.DataDirPath, "chaindata"))
-                || Directory.GetFiles(Path.Combine(activeNode.DataDirPath, "chaindata")).Length == 0)
+            if (!Directory.Exists(Path.Combine(activeNode.DataDirPath, "dataDir")))
             {
-                gethChainCommand.Append(" --genesis ").Append(activeNode.GenesisFilePath);
-            }
+                if (!File.Exists(Path.Combine(activeNode.DataDirPath, "CustomGenesis.json")))
+                    throw new Exception("Chain needs to be initialised but CustomGenesis.json file does not exist in folder: " + Path.Combine(activeNode.DataDirPath, "dataDir"));
 
-            if (!activeNode.IsPrimary)
+                MessageBox.Show("Chain needs to be initialised and CustomGenesis.json file has been found. After init completion, restart the node.", "GENESIS", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                gethChainCommand.Append(" --datadir \"").Append(Path.Combine(activeNode.DataDirPath, "dataDir")).Append("\"");
+                gethChainCommand.Append(" init \"").Append(Path.Combine(activeNode.DataDirPath, "CustomGenesis.json ")).Append("\"");
+            }
+            else
             {
-                gethChainCommand.Append(" --port ").Append(activeNode.Port);
-                gethChainCommand.Append(" --ipcpath ~/Library/Ethereum/").Append(activeNode.NodeName).Append("/geth.ipc");
-            }
+                if (!activeNode.IsPrimary)
+                {
+                    gethChainCommand.Append(" --port ").Append(activeNode.Port);
+                    gethChainCommand.Append(" --ipcpath ~/Library/Ethereum/").Append(activeNode.NodeName).Append("/geth.ipc");
+                }
 
-            if (activeNode.Verbosity > 0)
-                gethChainCommand.Append(" --verbosity ").Append(activeNode.Verbosity);
+                if (activeNode.Verbosity > 0)
+                    gethChainCommand.Append(" --verbosity ").Append(activeNode.Verbosity);
 
-            gethChainCommand.Append(" --datadir \"").Append(activeNode.DataDirPath).Append("\"")
-            .Append(" --identity ").Append(activeNode.NodeName);
-
-
-            if (activeNode.BlockChainVersion > 0)
-                gethChainCommand.Append(" --blockchainversion ").Append(activeNode.BlockChainVersion);
+                gethChainCommand.Append(" --datadir \"").Append(Path.Combine(activeNode.DataDirPath, "dataDir")).Append("\"")
+                .Append(" --identity ").Append(activeNode.NodeName);
 
 
-            gethChainCommand.Append(" --networkid ").Append(activeNode.NetworkID)
-            .Append(" --rpcport ").Append(activeNode.RpcPort);
+                gethChainCommand.Append(" --networkid ").Append(activeNode.NetworkID)
+                .Append(" --rpcport ").Append(activeNode.RpcPort);
 
-            if (activeNode.MaxPeers > 0)
-                gethChainCommand.Append(" --maxpeers ").Append(activeNode.MaxPeers);
-
+                if (activeNode.MaxPeers > 0)
+                    gethChainCommand.Append(" --maxpeers ").Append(activeNode.MaxPeers);
+            } 
             gethChainCommand.Append(" console ");
 
             return gethChainCommand.ToString();
-        }
-
-        public string FormGethMiningString(Node activeNode)
-        {
-            StringBuilder gethChainCommand = new StringBuilder();
-
-            if (!activeNode.IsPrimary)
-            {
-                gethChainCommand.Append(" --port ").Append(activeNode.Port);
-                gethChainCommand.Append(" --ipcpath ~/Library/Ethereum/").Append(activeNode.NodeName).Append("/geth.ipc");
-            }
-
-            if (activeNode.Verbosity > 0)
-                gethChainCommand.Append(" --verbosity ").Append(activeNode.Verbosity);
-
-            gethChainCommand.Append(" --datadir ").Append(activeNode.DataDirPath)
-            .Append(" --identity ").Append(activeNode.NodeName);
-
-
-            if (activeNode.BlockChainVersion > 0)
-                gethChainCommand.Append(" --blockchainversion ").Append(activeNode.BlockChainVersion);
-
-
-            gethChainCommand.Append(" --networkid ").Append(activeNode.NetworkID)
-            .Append(" --rpcport ").Append(activeNode.RpcPort);
-
-            if (activeNode.MaxPeers > 0)
-                gethChainCommand.Append(" --maxpeers ").Append(activeNode.MaxPeers);
-
-            gethChainCommand.Append(" --mine -rpccorsdomain \"*\" --ipcapi \"admin,eth,miner\" --rpcapi \"eth,web3\" --networkid 2147483645 --blockchainversion 12 -maxpeers 5 --minerthreads 1 console ");
-
-            return gethChainCommand.ToString();
-        }
+        } 
 
         public void SaveActiveNodeData(Node node)
         {
@@ -135,10 +104,7 @@ namespace Node_Runner.Helpers
         /// </summary>
         public void StartGeth(NodeActivity nodeActivity)
         {
-            string gethStartCommand = FormGethStartString(nodeActivity.ActiveNode);
-            if (nodeActivity.IsMining)
-                gethStartCommand = FormGethMiningString(nodeActivity.ActiveNode);
-
+            string gethStartCommand = FormGethStartString(nodeActivity.ActiveNode); 
             StartContainerCommandProcess(gethStartCommand, nodeActivity);
         }
 
@@ -161,7 +127,7 @@ namespace Node_Runner.Helpers
             Process process = new Process();
             nodeActivity.ConnectedProcess = process;
 
-            process.StartInfo.FileName = Path.Combine(nodeActivity.ActiveNode.GethPath, "geth.exe");
+            process.StartInfo.FileName = Path.Combine(nodeActivity.ActiveNode.DataDirPath, "geth.exe");
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
