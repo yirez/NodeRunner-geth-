@@ -19,5 +19,6 @@ namespace Node_Runner
         public int Verbosity { get; set; }
         public RPCExposeData RPCData { get; set; }
         public bool IsPrimary { get; set; }
+        public bool IsNoDiscover { get; set; }
     }
 }

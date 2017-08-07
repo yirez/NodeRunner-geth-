@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfNode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Node>
+    <NetworkID>12345</NetworkID>
+    <NodeName>Node0</NodeName>
+    <DataDirPath>D:\blockchain\Ethereum\YourCustomChain\node0\chain</DataDirPath>
+    <RpcPort>8103</RpcPort>
+    <Port>0</Port>
+    <MaxPeers>25</MaxPeers>
+    <Verbosity>0</Verbosity>
+    <IsPrimary>true</IsPrimary>
+  </Node>
+  <Node>
+    <NetworkID>12345</NetworkID>
+    <NodeName>Node1</NodeName>
+    <DataDirPath>D:\blockchain_critical\Ethereum\customchain1\node1\chain</DataDirPath>
+    <RpcPort>8102</RpcPort>
+    <Port>30302</Port>
+    <IPCPath>--ipcpath ~/Library/Ethereum/CustomChainPOCNode1/geth.ipc</IPCPath>
+    <MaxPeers>15</MaxPeers>
+    <Verbosity>0</Verbosity>
+    <IsPrimary>false</IsPrimary>
+  </Node> 
+</ArrayOfNode>

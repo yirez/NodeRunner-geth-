@@ -68,6 +68,10 @@ namespace Node_Runner.Helpers
 
                 if (activeNode.MaxPeers > 0)
                     gethChainCommand.Append(" --maxpeers ").Append(activeNode.MaxPeers);
+
+                if (activeNode.IsNoDiscover)
+                    gethChainCommand.Append(" --nodiscover ");
+
             } 
             gethChainCommand.Append(" console ");
 

@@ -444,13 +444,14 @@ namespace Node_Runner
 
             activeNode = new Node();
             activeNode.IsPrimary = chkPrimary.Checked; 
-            activeNode.MaxPeers = 15;
+            activeNode.MaxPeers = 25;
             activeNode.NodeName = txtNodeID.Text;
             activeNode.NetworkID = int.Parse(txtNetworkID.Text);
             activeNode.Port = (chkPrimary.Checked ? 30303 : int.Parse(txtPort.Text));
             activeNode.RpcPort = int.Parse(txtRPCPort.Text);
             activeNode.IPCPath = (chkPrimary.Checked ? null : "--ipcpath ~/Library/Ethereum/" + activeNode.NodeName + "/geth.ipc");
-            activeNode.DataDirPath = txtNodeFolder.Text; 
+            activeNode.DataDirPath = txtNodeFolder.Text;
+            activeNode.IsNoDiscover = chkNoDiscover.Checked;
              
             if (!Directory.Exists(activeNode.DataDirPath) || !File.Exists(Path.Combine(activeNode.DataDirPath, "geth.exe")))
                 throw new Exception("Geth does not exist. Geth MUST exist within "+activeNode.DataDirPath + " directory.");
@@ -467,11 +468,6 @@ namespace Node_Runner
             gethHelper.ActiveNodeList.Remove(activity);
             toggleGethFunctionalityButtons(false, false);
             activity.WorkerThread.CancelAsync();
-        }
-
-        private void btnInit_Click(object sender, EventArgs e)
-        {
-
-        }
+        } 
     }
 }
