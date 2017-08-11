@@ -39,9 +39,10 @@ namespace Node_Runner
         private void btnStartRPC_Click(object sender, EventArgs e)
         {
             gethHelper.SendCommandToConsole("admin.startRPC(\""
-                + txtRPCExposeHost.Text + "\",\""
-                + txtRPCExposePort.Text + "\",\""
-                + txtRPCExposeCors.Text + "\")"
+                + txtRPCExposeHost.Text + "\","
+                + txtRPCExposePort.Text + ",\""
+                + txtRPCExposeCors.Text + "\","
+                + "\"web3, db, net, eth\")"
                 , gethHelper.SelectedActivity.ConnectedProcess);
 
         }
