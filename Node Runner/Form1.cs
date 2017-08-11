@@ -42,7 +42,7 @@ namespace Node_Runner
                 + txtRPCExposeHost.Text + "\","
                 + txtRPCExposePort.Text + ",\""
                 + txtRPCExposeCors.Text + "\","
-                + "\"web3, db, net, eth\")"
+                + "\"web3, db, net, eth,personal\")"
                 , gethHelper.SelectedActivity.ConnectedProcess);
 
         }

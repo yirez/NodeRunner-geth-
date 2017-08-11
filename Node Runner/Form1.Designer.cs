@@ -266,6 +266,7 @@
             "eth",
             "web3",
             "net",
+            "personal",
             "shh",
             "bzz",
             "les"});
@@ -273,7 +274,7 @@
             this.lstRPCExposeAPIs.Name = "lstRPCExposeAPIs";
             this.lstRPCExposeAPIs.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstRPCExposeAPIs.Size = new System.Drawing.Size(86, 49);
-            this.lstRPCExposeAPIs.TabIndex = 30;
+            this.lstRPCExposeAPIs.TabIndex = 30; 
             // 
             // txtRPCExposeCors
             // 
